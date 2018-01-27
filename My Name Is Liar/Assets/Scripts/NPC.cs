@@ -33,6 +33,7 @@ public class NPC : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+		transform.position = NearestTileCenter (transform.position);
 		targetDest = transform.position;
 		
 	}
@@ -182,6 +183,7 @@ public class NPC : MonoBehaviour {
 			xSpeed = 0f;
 			ySpeed = 0f;
 			canMove = false;
+			CancelInvoke ();
 			Invoke ("AllowMovement", chatTime);
 
 		}
