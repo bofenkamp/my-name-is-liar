@@ -348,6 +348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Camera: {fileID: 1912706362}
   _InitialTimeRemaining: 10
+  _GameName: beep beep lol
   _OnStartGame:
     m_PersistentCalls:
       m_Calls: []
