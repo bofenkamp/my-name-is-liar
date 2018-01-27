@@ -40,7 +40,6 @@ GameObject:
   - component: {fileID: 4833540091272864}
   - component: {fileID: 20296497492705464}
   - component: {fileID: 124650111285730246}
-  - component: {fileID: 81684453927406878}
   m_Layer: 0
   m_Name: Player Camera
   m_TagString: MainCamera
@@ -55,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1224126553514038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.04, y: -0.06, z: 0}
+  m_LocalPosition: {x: -1.6, y: -0.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4833540091272864}
@@ -99,7 +98,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294966527
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -156,13 +155,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8168793, y: 1.0169308}
   m_EdgeRadius: 0
---- !u!81 &81684453927406878
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1561565722416764}
-  m_Enabled: 1
 --- !u!114 &114098230510577848
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -177,6 +169,8 @@ MonoBehaviour:
   _PlayerNumber: 0
   _MoveSpeed: 3.5
   _Camera: {fileID: 20296497492705464}
+  _MicrogameTexture: {fileID: 8400000, guid: 81ddce5acbbee4850986e40a3d14cc27, type: 2}
+  _UIAnimator: {fileID: 0}
 --- !u!124 &124650111285730246
 Behaviour:
   m_ObjectHideFlags: 1
