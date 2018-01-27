@@ -52,9 +52,11 @@ public class Player : MonoBehaviour {
 
     private void FixedUpdate()
     {
+        // You can't move if we are playing a microgame
+        if (GameManager.Instance.PlayingMicrogame(PlayerNumber))
+            return;
+        
         float d = _MoveSpeed * Time.fixedDeltaTime;
-        // If the rigidbody hits something, back up to the point of intersection
-
         Move(_MoveDir, d);
     }
 
