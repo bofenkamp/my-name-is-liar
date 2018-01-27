@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/micro_test.unity
     guid: 8c11040300ce946eca8a7f9fd2ae6366
+  - enabled: 1
+    path: Assets/Scenes/Minigames/Beer Pong.unity
+    guid: 0ad74374320b87846807f263ed795f13

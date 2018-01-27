@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
 
     public void LaunchMicrogame(PlayerID id) {
         _PlayerWaitingForGame[(int)id] = true;
-        SceneManager.LoadSceneAsync("micro_test", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("Beer Pong", LoadSceneMode.Additive);
         _Players[(int)id].UIAnimator.SetBool("microgame", true);
     }
 
