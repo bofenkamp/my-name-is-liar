@@ -5,7 +5,7 @@ using UnityEngine;
 public class RedSoloCup : MonoBehaviour {
 
 	[SerializeField]
-	private float cupSpeed, timerSubtraction;
+	private float cupSpeed;
 	[SerializeField] 
 	private Microgame microgame;
 	private BeerPongManager beerPongManager;
@@ -38,7 +38,7 @@ public class RedSoloCup : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.GetComponent<PingPongBall> ()) {
 			Destroy (other.gameObject);
-			microgame.AddToTime (-timerSubtraction);
+			microgame.AddToTime (-beerPongManager.timerSubtraction);
 		}
 	}
 }

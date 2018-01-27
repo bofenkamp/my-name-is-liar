@@ -380,8 +380,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cupSpeed: 6
-  timerSubtraction: 1
-  cupWidth: 10
   microgame: {fileID: 2117107128}
 --- !u!61 &1429375615
 BoxCollider2D:
@@ -437,7 +435,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Camera: {fileID: 1304490720}
-  _InitialTimeRemaining: 10
+  _InitialTimeRemaining: 20
+  _GameName: Get it in!
   _OnStartGame:
     m_PersistentCalls:
       m_Calls:
@@ -494,7 +493,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21923d2e75eac4e4489105687460c13a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PPBSpawnInterval: 1.3
+  _PPBSpawnInterval: 1.3
+  _timerSubtraction: 2
   PPBPrefab: {fileID: 1999534390789148, guid: 42ae1e9f8fd17e34888f227fece8057d, type: 2}
   camHeight: 0
   camWidth: 0

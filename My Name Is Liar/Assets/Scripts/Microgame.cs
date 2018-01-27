@@ -32,7 +32,7 @@ public class Microgame : MonoBehaviour {
 
     [SerializeField]
     private Camera _Camera;
-	public Camera camera {
+	public Camera Camera {
 		get { return _Camera; }
 	}
     [SerializeField]

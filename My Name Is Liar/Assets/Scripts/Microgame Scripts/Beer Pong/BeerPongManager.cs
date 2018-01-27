@@ -5,7 +5,7 @@ using UnityEngine;
 public class BeerPongManager : MonoBehaviour {
 
 	[SerializeField]
-	private float PPBSpawnInterval;
+	private float _PPBSpawnInterval, _timerSubtraction;
 	public GameObject PPBPrefab;
 
 	private Microgame microgame;
@@ -13,20 +13,24 @@ public class BeerPongManager : MonoBehaviour {
 	[HideInInspector]
 	public float camHeight, camWidth;
 
+	public float timerSubtraction{
+		get { return _timerSubtraction; }
+	}
+
 	// Use this for initialization
 	void Start () {
 		microgame = GetComponent<Microgame>();
 		PingPongBall.microgame = microgame;
 
 		// Get Main Camera height and width
-		camHeight = microgame.camera.orthographicSize * 2f;
+		camHeight = microgame.Camera.orthographicSize * 2f;
 		//camHeight = Camera.main.orthographicSize * 2f;
 		camWidth = camHeight * Camera.main.aspect;
 	}
 
 	// Called when game actually begins
 	public void OnStartGame() {
-		InvokeRepeating ("spawnNewPPB", 0.3f, PPBSpawnInterval);
+		InvokeRepeating ("spawnNewPPB", 0.3f, _PPBSpawnInterval);
 	}
 	
 	void spawnNewPPB() {
