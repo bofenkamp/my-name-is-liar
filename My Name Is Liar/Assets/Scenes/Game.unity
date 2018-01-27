@@ -281,8 +281,13 @@ Prefab:
       propertyPath: _UIAnimator
       value: 
       objectReference: {fileID: 996259338}
+    - target: {fileID: 20296497492705464, guid: 8bf468915d2954e99860f8a56880f823,
+        type: 2}
+      propertyPath: m_NormalizedViewPortRect.x
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 81684453927406878, guid: 8bf468915d2954e99860f8a56880f823, type: 2}
+    - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: 8bf468915d2954e99860f8a56880f823, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &478704470
@@ -782,22 +787,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1224126553514038, guid: 8bf468915d2954e99860f8a56880f823, type: 2}
-      propertyPath: m_Name
-      value: Player 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114098230510577848, guid: 8bf468915d2954e99860f8a56880f823,
-        type: 2}
-      propertyPath: _MicrogameTexture
-      value: 
-      objectReference: {fileID: 8400000, guid: 81ddce5acbbee4850986e40a3d14cc27, type: 2}
     - target: {fileID: 114098230510577848, guid: 8bf468915d2954e99860f8a56880f823,
         type: 2}
       propertyPath: _UIAnimator
       value: 
       objectReference: {fileID: 733302004}
-    m_RemovedComponents:
-    - {fileID: 81684453927406878, guid: 8bf468915d2954e99860f8a56880f823, type: 2}
+    - target: {fileID: 1224126553514038, guid: 8bf468915d2954e99860f8a56880f823, type: 2}
+      propertyPath: m_Name
+      value: Player 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8bf468915d2954e99860f8a56880f823, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1787858029
