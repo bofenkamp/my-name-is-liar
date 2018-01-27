@@ -38,13 +38,25 @@ public class GameManager : MonoBehaviour
         return _Players[(int)id];
     }
 
+
 	public void LaunchMicrogame(PlayerID id, GameObject npc) {
+        if(PlayingMicrogame(id))
+            return;
+
         _PlayerWaitingForGame[(int)id] = true;
-        SceneManager.LoadSceneAsync("micro_test", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("Beer Pong", LoadSceneMode.Additive);
         _Players[(int)id].UIAnimator.SetBool("microgame", true);
 		if (npcs == null)
 			npcs = new GameObject[2];
 		npcs [(int)id] = npc;
+    }
+
+    public bool PlayingMicrogame(PlayerID id) {
+        return _LoadedMicrogames[(int)id] != null;
+    }
+
+    public Microgame GetMicrogameForPlayer(PlayerID id) {
+        return _LoadedMicrogames[(int)id];
     }
 
     public void RegisterMicrogame(Microgame game) {

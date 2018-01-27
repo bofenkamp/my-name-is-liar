@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour {
@@ -14,18 +16,30 @@ public class Player : MonoBehaviour {
     public Animator UIAnimator {
         get { return _UIAnimator; }
     }
+    public TextMeshProUGUI TimeRemaining {
+        get { return _TimeRemaining; }
+    }
+    public TextMeshProUGUI MicrogameTitle {
+        get { return _MicrogameTitle; }
+    }
 
-
+    [Header("Gameplay Attributes")]
     [SerializeField]
     private PlayerID _PlayerNumber;
     [SerializeField]
     private float _MoveSpeed = 1f;
     [SerializeField]
     private Camera _Camera;
+
+    [Header("UI Objects")]
     [SerializeField]
     private RenderTexture _MicrogameTexture;
     [SerializeField]
     private Animator _UIAnimator;
+    [SerializeField]
+    private TextMeshProUGUI _TimeRemaining;
+    [SerializeField]
+    private TextMeshProUGUI _MicrogameTitle;
 
     private Rigidbody2D _Body;
     private RaycastHit2D[] _Hits;
@@ -54,13 +68,12 @@ public class Player : MonoBehaviour {
 
     private void FixedUpdate()
     {
-		if (!inMicrogame) 
-		{
-			float d = _MoveSpeed * Time.fixedDeltaTime;
-			// If the rigidbody hits something, back up to the point of intersection
-
-			Move (_MoveDir, d);
-		}
+        // You can't move if we are playing a microgame
+        if (GameManager.Instance.PlayingMicrogame(PlayerNumber))
+            return;
+        
+        float d = _MoveSpeed * Time.fixedDeltaTime;
+        Move(_MoveDir, d);
     }
 
     private void Move(Vector2 dir, float d) {
