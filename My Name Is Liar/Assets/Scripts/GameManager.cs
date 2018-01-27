@@ -43,6 +43,10 @@ public class GameManager : MonoBehaviour
         _Players[(int)id].UIAnimator.SetBool("microgame", true);
     }
 
+    public bool PlayingMicrogame(PlayerID id) {
+        return _LoadedMicrogames[(int)id] != null;
+    }
+
     public void RegisterMicrogame(Microgame game) {
         for (int x = 0; x < _PlayerWaitingForGame.Length; x++) {
             if (!_PlayerWaitingForGame[x])
