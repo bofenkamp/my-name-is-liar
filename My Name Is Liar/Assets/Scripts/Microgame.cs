@@ -32,6 +32,9 @@ public class Microgame : MonoBehaviour {
 
     [SerializeField]
     private Camera _Camera;
+	public Camera Camera {
+		get { return _Camera; }
+	}
     [SerializeField]
     private float _InitialTimeRemaining = 10;
     [SerializeField]
@@ -40,6 +43,8 @@ public class Microgame : MonoBehaviour {
     private GameEvent _OnStartGame;
     [SerializeField]
     private GameEvent _OnEndGame;
+	[SerializeField]
+	private bool _WinOnTimeOut = true;
 
     private float _AppliedTimeElapsed = 0;
     private float _LastTimerApply;
@@ -56,7 +61,7 @@ public class Microgame : MonoBehaviour {
             Owner.TimeRemaining.text = Mathf.Ceil(TimeRemaining).ToString("0");
 
             if (TimeRemaining <= 0)
-                EndMicrogame();
+				EndMicrogame(_WinOnTimeOut);
         }
     }
 
@@ -101,7 +106,7 @@ public class Microgame : MonoBehaviour {
         foreach (Transform t in go.transform)
             SetLayerRecursive(t.gameObject, layer);
     }
-
+		
     public void OnInstantiateObject(GameObject go) {
         int layer = 0;
         if (Owner.PlayerNumber == PlayerID.One)
@@ -111,7 +116,21 @@ public class Microgame : MonoBehaviour {
         SetLayerRecursive(go, layer);
     } 
 
-    public void EndMicrogame() {
+	public void EndMicrogame(bool won) {
+		
+		Owner.GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Dynamic;
+		//		GameManager.Instance.npcs [(int)Owner.PlayerNumber].GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Dynamic;
+
+		//change the npc's opinion based on results
+		if (won)
+			GameManager.Instance.npcs[(int)Owner.PlayerNumber].GetComponent<NPC>().ChangeOpinion((int)Owner.PlayerNumber + 1, 1);
+		else
+			GameManager.Instance.npcs[(int)Owner.PlayerNumber].GetComponent<NPC>().ChangeOpinion((int)Owner.PlayerNumber + 1, -1);
+
+		//let the NPC and player move again
+		GameManager.Instance.npcs [(int)Owner.PlayerNumber].GetComponent<NPC> ().inMinigame = false;
+		GameManager.Instance.npcs [(int)Owner.PlayerNumber].GetComponent<NPC> ().AllowMovement ();
+		
         // TODO
         GameManager.Instance.DeregisterMicrogame(this);
         _OnEndGame.Invoke();

@@ -30,6 +30,8 @@ public class NPC : MonoBehaviour {
 //	public GameObject uIndicate;
 //	public GameObject dIndicate;
 
+	public bool inMinigame;
+
 	// Use this for initialization
 	void Start () {
 
@@ -42,7 +44,7 @@ public class NPC : MonoBehaviour {
 	void Update () {
 
 		//start walking in new direction
-		if (canMove && xSpeed == 0 && ySpeed == 0) {
+		if (canMove && xSpeed == 0 && ySpeed == 0 && !inMinigame) {
 
 			//figure out how far it can go in all directions
 			float leftDist = Mathf.Infinity;
@@ -177,7 +179,7 @@ public class NPC : MonoBehaviour {
 
 	void OnCollisionEnter2D (Collision2D coll) {
 
-		if (coll.gameObject.tag == "NPC") {
+		if (coll.gameObject.tag == "NPC" && !coll.gameObject.GetComponent<NPC>().inMinigame) {
 
 			ConvinceNPC (coll.gameObject);
 			xSpeed = 0f;
@@ -186,8 +188,20 @@ public class NPC : MonoBehaviour {
 			CancelInvoke ();
 			Invoke ("AllowMovement", chatTime);
 
-		}
+		} else if (coll.gameObject.tag == "Player") {
+            var plr = coll.gameObject.GetComponent<Player>();
 
+            if(!GameManager.Instance.PlayingMicrogame(plr.PlayerNumber)) {
+                coll.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                //          GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Kinematic;
+                PlayerID initiator = plr.PlayerNumber;
+                GameManager.Instance.LaunchMicrogame(initiator, gameObject);
+                xSpeed = 0f;
+                ySpeed = 0f;
+                inMinigame = true;
+                CancelInvoke();
+            }
+		}
 	}
 
 	public void ChangeOpinion (int opinion, float value) { //call this function when their belief on either opinion has strengthened or weakened
@@ -254,7 +268,7 @@ public class NPC : MonoBehaviour {
 
 	}
 
-	void AllowMovement() {
+	public void AllowMovement() {
 
 		//start moving again
 		canMove = true;
