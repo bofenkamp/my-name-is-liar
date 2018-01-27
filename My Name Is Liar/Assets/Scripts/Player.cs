@@ -11,6 +11,9 @@ public class Player : MonoBehaviour {
     public RenderTexture MicrogameTexture {
         get { return _MicrogameTexture; }
     }
+    public Animator UIAnimator {
+        get { return _UIAnimator; }
+    }
 
 
     [SerializeField]
@@ -21,6 +24,8 @@ public class Player : MonoBehaviour {
     private Camera _Camera;
     [SerializeField]
     private RenderTexture _MicrogameTexture;
+    [SerializeField]
+    private Animator _UIAnimator;
 
     private Rigidbody2D _Body;
     private RaycastHit2D[] _Hits;
