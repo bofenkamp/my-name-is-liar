@@ -53,3 +53,4 @@
 /Users/matthewbofenkamp/my-name-is-liar/My Name Is Liar/Temp/bin/Debug/Assembly-CSharp.dll
 /Users/matthewbofenkamp/my-name-is-liar/My Name Is Liar/obj/Debug/Assembly-CSharp.dll
 /Users/matthewbofenkamp/my-name-is-liar/My Name Is Liar/obj/Debug/Assembly-CSharp.dll.mdb
+/Users/matthewbofenkamp/my-name-is-liar/My Name Is Liar/Temp/bin/Debug/UnityEditor.iOS.Extensions.Xcode.dll.mdb
