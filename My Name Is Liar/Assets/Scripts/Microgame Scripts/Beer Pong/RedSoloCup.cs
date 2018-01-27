@@ -5,14 +5,15 @@ using UnityEngine;
 public class RedSoloCup : MonoBehaviour {
 
 	[SerializeField]
-	private float cupSpeed;
+	private float cupSpeed, timerSubtraction;
 	[SerializeField] 
-	private Microgame microgameManager;
+	private Microgame microgame;
+	private BeerPongManager beerPongManager;
 	private bool playing = false;
 
 	// Rendering/Transform initialization
 	void Start () {
-		
+		beerPongManager = microgame.GetComponent<BeerPongManager> ();
 	}
 
 	// Called when game actually begins
@@ -22,16 +23,22 @@ public class RedSoloCup : MonoBehaviour {
 
 	void Update () {
 		if (playing) {
-			float getAxis = microgameManager.Owner.GetAxis (PlayerAxis.Horizontal);
-			GetComponent<Rigidbody2D> ().velocity = new Vector2 (1f, 0f) * cupSpeed * getAxis;
+			float cupRadius = GetComponent<BoxCollider2D> ().size.x;
+			float getAxis = microgame.Owner.GetAxis (PlayerAxis.Horizontal);
+			if ((getAxis < 0 && (transform.position.x - cupRadius / 2) < -beerPongManager.camWidth / 2)
+				|| (getAxis > 0 && (transform.position.x + cupRadius / 2) > beerPongManager.camWidth / 2)) {
+				GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
+			} else {
+				GetComponent<Rigidbody2D> ().velocity = new Vector2 (1f, 0f) * cupSpeed * getAxis;
+			}
 		}
 	}
 
-	// Destroy the ping pong ball when it falls into the cup
+	// Destroy the ping pong ball and subtract from timer when it falls into the cup
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.GetComponent<PingPongBall> ()) {
 			Destroy (other.gameObject);
-			// Lower timer here
+			microgame.AddToTime (-timerSubtraction);
 		}
 	}
 }

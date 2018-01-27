@@ -8,16 +8,20 @@ public class BeerPongManager : MonoBehaviour {
 	private float PPBSpawnInterval;
 	public GameObject PPBPrefab;
 
-	private float camHeight;
-	private float camWidth;
+	private Microgame microgame;
+
+	[HideInInspector]
+	public float camHeight, camWidth;
 
 	// Use this for initialization
 	void Start () {
-		// Get Main Camera height and width
-		camHeight = Camera.main.orthographicSize * 2f;
-		camWidth = camHeight * Camera.main.aspect;
-		// For testing:
+		microgame = GetComponent<Microgame>();
+		PingPongBall.microgame = microgame;
 
+		// Get Main Camera height and width
+		camHeight = microgame.camera.orthographicSize * 2f;
+		//camHeight = Camera.main.orthographicSize * 2f;
+		camWidth = camHeight * Camera.main.aspect;
 	}
 
 	// Called when game actually begins
@@ -27,7 +31,8 @@ public class BeerPongManager : MonoBehaviour {
 	
 	void spawnNewPPB() {
 		GameObject newPPB = Instantiate (PPBPrefab);
-		float spawnX = Random.Range (-camWidth, camWidth);
+		microgame.OnInstantiateObject (newPPB);
+		float spawnX = 0.9f * Random.Range (-camWidth/2, camWidth/2);
 		newPPB.transform.position = new Vector3 (spawnX, 0f);
 	}
 }

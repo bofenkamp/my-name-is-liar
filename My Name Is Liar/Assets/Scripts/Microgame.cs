@@ -14,6 +14,9 @@ public class Microgame : MonoBehaviour {
 
     [SerializeField]
     private Camera _Camera;
+	public Camera camera {
+		get { return _Camera; }
+	}
     [SerializeField]
     private float _InitialTimeRemaining = 10;
     [SerializeField]
