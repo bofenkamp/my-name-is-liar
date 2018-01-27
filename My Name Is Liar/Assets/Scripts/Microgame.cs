@@ -65,6 +65,11 @@ public class Microgame : MonoBehaviour {
         }
     }
 
+    public void RefetchMicrogameTexture() {
+        if(_HasStartedGame)
+            _Camera.targetTexture = Owner.MicrogameTexture;
+    }
+
     public void StartMicrogame(Player player) {
         if (Owner != null)
             return;
@@ -125,7 +130,6 @@ public class Microgame : MonoBehaviour {
 		//let the NPC and player move again
 		GameManager.Instance.npcs [(int)Owner.PlayerNumber].GetComponent<NPC> ().inMinigame = false;
 		GameManager.Instance.npcs [(int)Owner.PlayerNumber].GetComponent<NPC> ().AllowMovement ();
-		Owner.inMicrogame = false;
 		
         // TODO
         GameManager.Instance.DeregisterMicrogame(this);

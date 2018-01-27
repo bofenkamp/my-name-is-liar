@@ -296,6 +296,16 @@ Prefab:
       propertyPath: _MicrogameTitle
       value: 
       objectReference: {fileID: 1828388322}
+    - target: {fileID: 114098230510577848, guid: 8bf468915d2954e99860f8a56880f823,
+        type: 2}
+      propertyPath: _MicrogameSizer
+      value: 
+      objectReference: {fileID: 2032042551}
+    - target: {fileID: 114098230510577848, guid: 8bf468915d2954e99860f8a56880f823,
+        type: 2}
+      propertyPath: _MicrogameImage
+      value: 
+      objectReference: {fileID: 1650221884}
     m_RemovedComponents:
     - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: 8bf468915d2954e99860f8a56880f823, type: 2}
@@ -1062,7 +1072,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 8400000, guid: 81ddce5acbbee4850986e40a3d14cc27, type: 2}
+  m_Texture: {fileID: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1129,7 +1139,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 8400000, guid: a20eed279bd1c404998289c2e47476b4, type: 2}
+  m_Texture: {fileID: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1353,6 +1363,16 @@ Prefab:
       propertyPath: _MicrogameTitle
       value: 
       objectReference: {fileID: 1423805562}
+    - target: {fileID: 114098230510577848, guid: 8bf468915d2954e99860f8a56880f823,
+        type: 2}
+      propertyPath: _MicrogameSizer
+      value: 
+      objectReference: {fileID: 1448407838}
+    - target: {fileID: 114098230510577848, guid: 8bf468915d2954e99860f8a56880f823,
+        type: 2}
+      propertyPath: _MicrogameImage
+      value: 
+      objectReference: {fileID: 1521634381}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8bf468915d2954e99860f8a56880f823, type: 2}
   m_IsPrefabParent: 0
