@@ -18,13 +18,22 @@ public class NPC : MonoBehaviour {
 	private float ySpeed = 0f;
 	private bool canMove = true;
 	private int dir = 0; //0 = none, 1 = left, 2 = up, 3 = right, 4 = down
+	private Vector2 targetDest;
+	private bool justTalked = false; //did they just finish talking to someone?
 
 	public float tileSize = .16f;
 
 	public float chatTime; //time NPCs spend talking to each other
 
+//	public GameObject lIndicate;
+//	public GameObject rIndicate;
+//	public GameObject uIndicate;
+//	public GameObject dIndicate;
+
 	// Use this for initialization
 	void Start () {
+
+		targetDest = transform.position;
 		
 	}
 	
@@ -54,27 +63,48 @@ public class NPC : MonoBehaviour {
 			if (downHit)
 				downDist = downHit.distance / tileSize;
 
-			//if a direction is not viable, make sure it's because a wall blocked their path, not a player or npc
-			if (leftDist == 0 && (leftHit.transform.tag == "NPC" || leftHit.transform.tag == "Player"))
-				leftDist++;
-			if (rightDist == 0 && (rightHit.transform.tag == "NPC" || rightHit.transform.tag == "Player"))
-				rightDist++;
-			if (upDist == 0 && (upHit.transform.tag == "NPC" || upHit.transform.tag == "Player"))
-				upDist++;
-			if (downDist == 0 && (downHit.transform.tag == "NPC" || downHit.transform.tag == "Player"))
-				downDist++;
+			if (!justTalked) {
+				
+				//if a direction is not viable, make sure it's because a wall blocked their path, not a player or npc
+				if (leftDist == 0 && (leftHit.transform.tag == "NPC" || leftHit.transform.tag == "Player"))
+					leftDist++;
+				if (rightDist == 0 && (rightHit.transform.tag == "NPC" || rightHit.transform.tag == "Player"))
+					rightDist++;
+				if (upDist == 0 && (upHit.transform.tag == "NPC" || upHit.transform.tag == "Player"))
+					upDist++;
+				if (downDist == 0 && (downHit.transform.tag == "NPC" || downHit.transform.tag == "Player"))
+					downDist++;
+				
+			}
 
 			List<int> viableDirections = new List<int>();
 
 			//populate the list of viable directions with directions that don't involve turning back or running into a wall
-			if (leftDist > 0 && dir != 3)
+			if (leftDist > 0 && (dir != 3 || justTalked))
 				viableDirections.Add (1);
-			if (rightDist > 0 && dir != 1)
+			if (rightDist > 0 && (dir != 1 || justTalked))
 				viableDirections.Add (3);
-			if (upDist > 0 && dir != 4)
+			if (upDist > 0 && (dir != 4 || justTalked))
 				viableDirections.Add (2);
-			if (downDist > 0 && dir != 2)
+			if (downDist > 0 && (dir != 2 || justTalked))
 				viableDirections.Add (4);
+
+//			if (viableDirections.Contains (1))
+//				lIndicate.SetActive (true);
+//			else
+//				lIndicate.SetActive (false);
+//			if (viableDirections.Contains (2))
+//				uIndicate.SetActive (true);
+//			else
+//				uIndicate.SetActive (false);
+//			if (viableDirections.Contains (3))
+//				rIndicate.SetActive (true);
+//			else
+//				rIndicate.SetActive (false);
+//			if (viableDirections.Contains (4))
+//				dIndicate.SetActive (true);
+//			else
+//				dIndicate.SetActive (false);
 
 			//choose direction
 			if (viableDirections.Count == 0) { //reached dead end, turn around
@@ -90,10 +120,10 @@ public class NPC : MonoBehaviour {
 					dir = 0;
 			}
 
-			if (viableDirections.Count == 1) //only one way you can go
+			else if (viableDirections.Count == 1) //only one way you can go
 				dir = viableDirections[0];
 
-			if (viableDirections.Count == 2) //fork in the road
+			else if (viableDirections.Count == 2) //fork in the road
 				dir = viableDirections [Random.Range (0, 2)];
 
 			else { //probably in the plaza
@@ -104,9 +134,14 @@ public class NPC : MonoBehaviour {
 				//so if they're in the plaza, there's an 80% chance 
 				//that they'll keep going the same direction
 				//unless that's not a viable option
-				float i = Random.Range (0, 1);
-				if (i < 0.2f || !viableDirections.Contains (dir))
-					dir = viableDirections [Random.Range (0, viableDirections.Count)];
+				float i = Random.Range (0, 100);
+				if (i < 20f || !viableDirections.Contains (dir)) {
+					Debug.Log ("---");
+					Debug.Log (viableDirections.Count);
+					int j = Random.Range (0, viableDirections.Count);
+					Debug.Log (j);
+					dir = viableDirections [j];
+				}
 
 			}
 
@@ -114,23 +149,31 @@ public class NPC : MonoBehaviour {
 			if (dir == 0) { //keep still
 				xSpeed = 0f;
 				ySpeed = 0f;
+				targetDest = transform.position;
 			} else if (dir == 1) { //go left
 				xSpeed = -speed;
 				ySpeed = 0f;
+				targetDest = new Vector2 (targetDest.x - tileSize, targetDest.y);
 			} else if (dir == 2) { //go up
 				xSpeed = 0f;
 				ySpeed = speed;
+				targetDest = new Vector2 (targetDest.x, targetDest.y + tileSize);
 			} else if (dir == 3) { //go right
 				xSpeed = speed;
 				ySpeed = 0f;
+				targetDest = new Vector2 (targetDest.x + tileSize, targetDest.y);
 			} else if (dir == 4) { //go down
 				xSpeed = 0f;
 				ySpeed = -speed;
+				targetDest = new Vector2 (targetDest.x, targetDest.y - tileSize);
 			}
 
-			//INVOKE NEXT DIRECTION CHANGE AND SNAP TO CENTER OF TILE
+			Invoke ("ChangeDirection", tileSize / speed);
+			justTalked = false;
 
 		}
+
+		GetComponent<Rigidbody2D> ().velocity = new Vector2 (xSpeed, ySpeed);
 		
 	}
 
@@ -214,7 +257,49 @@ public class NPC : MonoBehaviour {
 
 	void AllowMovement() {
 
+		//put it in a good place
 		canMove = true;
+		transform.position = NearestTileCenter (transform.position);
+		targetDest = transform.position;
+		transform.rotation = Quaternion.identity;
+		justTalked = true; //changes some movement instructions to stop repeated conversation
+
+	}
+
+	void ChangeDirection() {
+
+		xSpeed = 0;
+		ySpeed = 0;
+		if (canMove)
+			transform.position = targetDest;
+		transform.rotation = Quaternion.identity;
+
+	}
+
+	Vector2 NearestTileCenter (Vector2 pos) {
+
+		float xRounded = Mathf.Round (pos.x / tileSize) * tileSize;
+		float xUp = xRounded + 1;
+		float xDown = xRounded - 1;
+
+		float yRounded = Mathf.Round (pos.y / tileSize) * tileSize;
+		float yUp = yRounded + 1;
+		float yDown = yRounded - 1;
+
+		float x = xRounded;
+		float y = yRounded;
+
+		if (Mathf.Abs (pos.x - xUp) < Mathf.Abs (pos.x - xRounded))
+			x = xUp;
+		if (Mathf.Abs (pos.x - xDown) < Mathf.Abs (pos.x - x))
+			x = xDown;
+
+		if (Mathf.Abs (pos.y - yUp) < Mathf.Abs (pos.y - yRounded))
+			y = yUp;
+		if (Mathf.Abs (pos.y - yDown) < Mathf.Abs (pos.y - y))
+			y = yDown;
+
+		return new Vector2 (x, y);
 
 	}
 }
