@@ -80,13 +80,13 @@ public class NPC : MonoBehaviour {
 			List<int> viableDirections = new List<int>();
 
 			//populate the list of viable directions with directions that don't involve turning back or running into a wall
-			if (leftDist > 0 && (dir != 3 || justTalked))
+			if (leftDist > 0 && dir != 3)
 				viableDirections.Add (1);
-			if (rightDist > 0 && (dir != 1 || justTalked))
+			if (rightDist > 0 && dir != 1)
 				viableDirections.Add (3);
-			if (upDist > 0 && (dir != 4 || justTalked))
+			if (upDist > 0 && dir != 4)
 				viableDirections.Add (2);
-			if (downDist > 0 && (dir != 2 || justTalked))
+			if (downDist > 0 && dir != 2)
 				viableDirections.Add (4);
 
 //			if (viableDirections.Contains (1))
@@ -136,10 +136,7 @@ public class NPC : MonoBehaviour {
 				//unless that's not a viable option
 				float i = Random.Range (0, 100);
 				if (i < 20f || !viableDirections.Contains (dir)) {
-					Debug.Log ("---");
-					Debug.Log (viableDirections.Count);
 					int j = Random.Range (0, viableDirections.Count);
-					Debug.Log (j);
 					dir = viableDirections [j];
 				}
 
@@ -257,11 +254,33 @@ public class NPC : MonoBehaviour {
 
 	void AllowMovement() {
 
-		//put it in a good place
+		//start moving again
 		canMove = true;
-		transform.position = NearestTileCenter (transform.position);
-		targetDest = transform.position;
+//		transform.position = NearestTileCenter (transform.position);
+		targetDest = NearestTileCenter (transform.position);
 		transform.rotation = Quaternion.identity;
+
+		//move to nearest tile center
+		Vector2 diff = targetDest - new Vector2(transform.position.x, transform.position.y);
+		float angle = Mathf.Atan2 (diff.y, diff.x);
+		float dist = diff.magnitude;
+		xSpeed = speed * Mathf.Cos (angle);
+		ySpeed = speed * Mathf.Sin (angle);
+
+		if (Mathf.Abs (xSpeed) > Mathf.Abs (ySpeed)) { //more horizontal than vertical
+			if (xSpeed > 0) //overall moving to the right
+				dir = 3;
+			else //overall moving to the left
+				dir = 1; 
+		} else { //more vertical than horizontal
+			if (ySpeed > 0) //overall moving up
+				dir = 2;
+			else //overall moving down
+				dir = 4;
+		}
+
+		Invoke ("ChangeDirection", dist / speed);
+
 		justTalked = true; //changes some movement instructions to stop repeated conversation
 
 	}
