@@ -56,6 +56,15 @@ public class Microgame : MonoBehaviour {
             SetLayerRecursive(t.gameObject, layer);
     }
 
+    public void OnInstantiateObject(GameObject go) {
+        int layer = 0;
+        if (Owner.PlayerNumber == PlayerID.One)
+            layer = 8;
+        else
+            layer = 9;
+        SetLayerRecursive(go, layer);
+    } 
+
     public void EndMicrogame() {
         // TODO
         GameManager.Instance.DeregisterMicrogame(this);
