@@ -38,6 +38,9 @@ public class GameManager : MonoBehaviour
     }
 
     public void LaunchMicrogame(PlayerID id) {
+        if(PlayingMicrogame(id))
+            return;
+        
         _PlayerWaitingForGame[(int)id] = true;
         SceneManager.LoadSceneAsync("Beer Pong", LoadSceneMode.Additive);
         _Players[(int)id].UIAnimator.SetBool("microgame", true);
@@ -45,6 +48,10 @@ public class GameManager : MonoBehaviour
 
     public bool PlayingMicrogame(PlayerID id) {
         return _LoadedMicrogames[(int)id] != null;
+    }
+
+    public Microgame GetMicrogameForPlayer(PlayerID id) {
+        return _LoadedMicrogames[(int)id];
     }
 
     public void RegisterMicrogame(Microgame game) {

@@ -9,8 +9,26 @@ public class Microgame : MonoBehaviour {
     
     public Player Owner { get; private set; }
 
-    [NonSerialized]
-    public float Timescale = 1.0f;
+    public float Timescale {
+        get {
+            return _Timescale;
+        }
+        set {
+            ApplyTimescale();
+            _Timescale = value;
+        }
+    }
+    private float _Timescale = 1.0f;
+    public float TimeElapsed {
+        get {
+            return _AppliedTimeElapsed + (Time.time - _LastTimerApply) * Timescale;
+        }
+    }
+    public float TimeRemaining {
+        get {
+            return Mathf.Max(0, _GameLength - TimeElapsed);
+        }
+    }
 
     [SerializeField]
     private Camera _Camera;
@@ -20,15 +38,29 @@ public class Microgame : MonoBehaviour {
     [SerializeField]
     private float _InitialTimeRemaining = 10;
     [SerializeField]
+    private string _GameName = "Do this!";
+    [SerializeField]
     private GameEvent _OnStartGame;
     [SerializeField]
     private GameEvent _OnEndGame;
 
-    private float _TimeRemaining;
+    private float _AppliedTimeElapsed = 0;
+    private float _LastTimerApply;
+    private float _GameLength;
+    private bool _HasStartedGame = false;
 
     private void Start()
     {
         GameManager.Instance.RegisterMicrogame(this);
+    }
+
+    private void Update() {
+        if(_HasStartedGame) {
+            Owner.TimeRemaining.text = Mathf.Ceil(TimeRemaining).ToString("0");
+
+            if (TimeRemaining <= 0)
+                EndMicrogame();
+        }
     }
 
     public void StartMicrogame(Player player) {
@@ -36,8 +68,10 @@ public class Microgame : MonoBehaviour {
             return;
         
         Owner = player;
-        _TimeRemaining = _InitialTimeRemaining;
+        _GameLength = _InitialTimeRemaining;
+        _LastTimerApply = Time.time;
         _Camera.targetTexture = player.MicrogameTexture;
+        _HasStartedGame = true;
 
         int layer = 0;
         if (player.PlayerNumber == PlayerID.One)
@@ -46,11 +80,18 @@ public class Microgame : MonoBehaviour {
             layer = 9;
         _Camera.cullingMask = 1 << layer;
 
+        Owner.MicrogameTitle.text = _GameName;
+
         var objs = gameObject.scene.GetRootGameObjects();
         foreach (var obj in objs)
             SetLayerRecursive(obj, layer);
 
         _OnStartGame.Invoke();
+    }
+
+    private void ApplyTimescale() {
+        _AppliedTimeElapsed += (_LastTimerApply - Time.time) * Timescale;
+        _LastTimerApply = Time.time;
     }
 
     private void SetLayerRecursive(GameObject go, int layer) {
@@ -77,7 +118,7 @@ public class Microgame : MonoBehaviour {
     }
 
     public void AddToTime(float secs) {
-        _TimeRemaining += secs;
+        _GameLength += secs;
     }
 
     [Serializable]
