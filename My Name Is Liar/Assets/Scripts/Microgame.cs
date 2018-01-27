@@ -60,6 +60,11 @@ public class Microgame : MonoBehaviour {
         }
     }
 
+    public void RefetchMicrogameTexture() {
+        if(_HasStartedGame)
+            _Camera.targetTexture = Owner.MicrogameTexture;
+    }
+
     public void StartMicrogame(Player player) {
         if (Owner != null)
             return;
