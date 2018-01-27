@@ -9,6 +9,9 @@ public class NPC : MonoBehaviour {
 	public float opinion2;
 	public float persuasion; //maximum power of their persuasion compared to the player's (1)
 
+	public Color col1;
+	public Color col2;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -39,6 +42,14 @@ public class NPC : MonoBehaviour {
 			else
 				opinion2 = 0;
 		}
+
+		//change their color
+		float percent1 = opinion1 / (opinion1 + opinion2);
+		float percent2 = opinion2 / (opinion1 + opinion2);
+		GetComponent<SpriteRenderer> ().color = new Color (
+			col1.r * percent1 + col2.r * percent2,
+			col1.g * percent1 + col2.g * percent2,
+			col1.b * percent1 + col2.b * percent2, 1f);
 
 	}
 
