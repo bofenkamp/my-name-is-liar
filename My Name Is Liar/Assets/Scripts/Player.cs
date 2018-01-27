@@ -8,12 +8,19 @@ public class Player : MonoBehaviour {
     public PlayerID PlayerNumber {
         get { return _PlayerNumber; }
     }
+    public RenderTexture MicrogameTexture {
+        get { return _MicrogameTexture; }
+    }
+
+
     [SerializeField]
     private PlayerID _PlayerNumber;
     [SerializeField]
     private float _MoveSpeed = 1f;
     [SerializeField]
     private Camera _Camera;
+    [SerializeField]
+    private RenderTexture _MicrogameTexture;
 
     private Rigidbody2D _Body;
     private RaycastHit2D[] _Hits;
