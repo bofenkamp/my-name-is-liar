@@ -9,11 +9,17 @@ public class RedSoloCup : MonoBehaviour {
 	[SerializeField] 
 	private Microgame microgame;
 	private BeerPongManager beerPongManager;
+	private Rigidbody2D rb;
+
+	private float minPosY;
 	private bool playing = false;
 
 	// Rendering/Transform initialization
 	void Start () {
 		beerPongManager = microgame.GetComponent<BeerPongManager> ();
+		rb = GetComponent<Rigidbody2D> ();
+			
+		minPosY = transform.position.y;
 	}
 
 	// Called when game actually begins
@@ -23,14 +29,25 @@ public class RedSoloCup : MonoBehaviour {
 
 	void Update () {
 		if (playing) {
+			Vector2 velo = Vector2.zero;
+
+			// Horizontal movement
 			float cupRadius = GetComponent<BoxCollider2D> ().size.x;
 			float getAxis = microgame.Owner.GetAxis (PlayerAxis.Horizontal);
-			if ((getAxis < 0 && (transform.position.x - cupRadius / 2) < -beerPongManager.camWidth / 2)
-				|| (getAxis > 0 && (transform.position.x + cupRadius / 2) > beerPongManager.camWidth / 2)) {
-				GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
-			} else {
-				GetComponent<Rigidbody2D> ().velocity = new Vector2 (1f, 0f) * cupSpeed * getAxis;
+			if (!((getAxis < 0 && (transform.position.x - cupRadius / 2) < -beerPongManager.camWidth / 2)
+			    || (getAxis > 0 && (transform.position.x + cupRadius / 2) > beerPongManager.camWidth / 2))) {
+				velo.x = cupSpeed * getAxis;
 			}
+
+			// Vertical movement
+			float height = GetComponent <BoxCollider2D> ().size.y * 2;
+			getAxis = microgame.Owner.GetAxis (PlayerAxis.Vertical);
+			if (!((getAxis < 0 && (transform.position.y - height / 2) < -beerPongManager.camHeight / 2)
+			    || (getAxis > 0 && (transform.position.y) > -beerPongManager.camWidth / 2 + height))) {
+				velo.y = cupSpeed * getAxis;
+			}
+
+			rb.velocity = velo;
 		}
 	}
 
