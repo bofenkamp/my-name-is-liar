@@ -9,6 +9,6 @@ public class WinOnKeypress : MonoBehaviour {
 
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Space))
-            _Game.EndMicrogame();
+			_Game.EndMicrogame(true);
 	}
 }

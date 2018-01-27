@@ -32,6 +32,8 @@ public class Player : MonoBehaviour {
 
     private Vector2 _MoveDir = Vector2.zero;
 
+	[HideInInspector] public bool inMicrogame = false;
+
 	private void Start ()
     {
         GameManager.Instance.RegisterPlayer(this);
@@ -52,10 +54,13 @@ public class Player : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        float d = _MoveSpeed * Time.fixedDeltaTime;
-        // If the rigidbody hits something, back up to the point of intersection
+		if (!inMicrogame) 
+		{
+			float d = _MoveSpeed * Time.fixedDeltaTime;
+			// If the rigidbody hits something, back up to the point of intersection
 
-        Move(_MoveDir, d);
+			Move (_MoveDir, d);
+		}
     }
 
     private void Move(Vector2 dir, float d) {

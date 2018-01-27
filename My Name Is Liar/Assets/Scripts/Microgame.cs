@@ -56,7 +56,22 @@ public class Microgame : MonoBehaviour {
             SetLayerRecursive(t.gameObject, layer);
     }
 
-    public void EndMicrogame() {
+	public void EndMicrogame(bool won) {
+
+		Owner.GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Dynamic;
+//		GameManager.Instance.npcs [(int)Owner.PlayerNumber].GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Dynamic;
+
+		//change the npc's opinion based on results
+		if (won)
+			GameManager.Instance.npcs[(int)Owner.PlayerNumber].GetComponent<NPC>().ChangeOpinion((int)Owner.PlayerNumber + 1, 1);
+		else
+			GameManager.Instance.npcs[(int)Owner.PlayerNumber].GetComponent<NPC>().ChangeOpinion((int)Owner.PlayerNumber + 1, -1);
+
+		//let the NPC and player move again
+		GameManager.Instance.npcs [(int)Owner.PlayerNumber].GetComponent<NPC> ().inMinigame = false;
+		GameManager.Instance.npcs [(int)Owner.PlayerNumber].GetComponent<NPC> ().AllowMovement ();
+		Owner.inMicrogame = false;
+
         // TODO
         GameManager.Instance.DeregisterMicrogame(this);
         _OnEndGame.Invoke();
