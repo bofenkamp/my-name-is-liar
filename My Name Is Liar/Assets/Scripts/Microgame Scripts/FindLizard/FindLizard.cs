@@ -62,15 +62,10 @@ public class FindLizard : MonoBehaviour {
 		wrongAnswers.Add ("Some rocks, but not all of them");
 		wrongAnswers.Add ("A burrito wearing makeup");
 		wrongAnswers.Add ("The complete works of William Shakespeare");
-<<<<<<< HEAD:My Name Is Liar/Assets/Scripts/Microgame Scripts/FindLizard/FindLizard.cs
 		wrongAnswers.Add ("A lizard");
-		wrongAnswers.Add ("A human lying about being a beetle");
-		wrongAnswers.Add ("A shiny new car!!!");
-=======
 		wrongAnswers.Add ("A spider");
 		wrongAnswers.Add ("A human lying about being a beetle");
 		wrongAnswers.Add ("A shiny new lexus!!!");
->>>>>>> npc:My Name Is Liar/Assets/Scripts/Microgame Scripts/FindLizard.cs
 		wrongAnswers.Add ("An inexplicable flag of Kyrgyzstan");
 		wrongAnswers.Add ("Your butt");
 		wrongAnswers.Add ("A person dressed as a beetle");
