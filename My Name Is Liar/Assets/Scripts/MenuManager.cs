@@ -8,6 +8,14 @@ public class MenuManager : MonoBehaviour {
 		//TODO
 	}
 
+	public void Credits() {
+
+	}
+
+	public void MainMenu() {
+
+	}
+
 	public void QuitGame() {
 		Application.Quit ();
 	}
