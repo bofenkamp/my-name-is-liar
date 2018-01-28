@@ -25,14 +25,16 @@ public class Girls : MonoBehaviour {
 
 	[HideInInspector] public bool gameStarted;
 
+	private Microgame micrograme;
+
 	// Use this for initialization
 	void Start () {
-
-		SpawnGirls ();
-		
+		micrograme = GetComponent<Microgame> ();
 	}
 
 	public void SpawnGirls () {
+		
+		micrograme = GetComponent<Microgame> ();
 
 		num = Random.Range (min, max + 1);
 
@@ -41,8 +43,8 @@ public class Girls : MonoBehaviour {
 			float x = Random.Range (minX, maxX);
 			float y = Random.Range (minY, maxY);
 			Vector2 pos = new Vector2 (x, y);
-			Instantiate (girl, pos, Quaternion.identity);
-
+			GameObject PartyGirl = Instantiate (girl, pos, Quaternion.identity);
+			micrograme.OnInstantiateObject (PartyGirl);
 		}
 
 		int boyNum = Random.Range (boyMin, boyMax + 1);
@@ -52,7 +54,8 @@ public class Girls : MonoBehaviour {
 			float x = Random.Range (minX, maxX);
 			float y = Random.Range (minY, maxY);
 			Vector2 pos = new Vector2 (x, y);
-			Instantiate (boy, pos, Quaternion.identity);
+			GameObject DistractingBoi = Instantiate (boy, pos, Quaternion.identity);
+			micrograme.OnInstantiateObject (DistractingBoi);
 
 		}
 
