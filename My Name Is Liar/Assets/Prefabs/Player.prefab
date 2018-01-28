@@ -169,8 +169,11 @@ MonoBehaviour:
   _PlayerNumber: 0
   _MoveSpeed: 3.5
   _Camera: {fileID: 20296497492705464}
-  _MicrogameTexture: {fileID: 8400000, guid: 81ddce5acbbee4850986e40a3d14cc27, type: 2}
+  _MicrogameImage: {fileID: 0}
   _UIAnimator: {fileID: 0}
+  _TimeRemaining: {fileID: 0}
+  _MicrogameTitle: {fileID: 0}
+  _MicrogameSizer: {fileID: 0}
 --- !u!124 &124650111285730246
 Behaviour:
   m_ObjectHideFlags: 1

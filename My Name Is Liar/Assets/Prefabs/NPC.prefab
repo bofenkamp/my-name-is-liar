@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1967734948325022}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: -6.5, z: 0}
+  m_LocalPosition: {x: -8.230965, y: 1.941066, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -104,9 +104,10 @@ MonoBehaviour:
   persuasion: 1
   col1: {r: 1, g: 1, b: 0, a: 0}
   col2: {r: 0, g: 0, b: 1, a: 0}
-  speed: 5
+  speed: 2
   tileSize: 1
   chatTime: 1
+  inMinigame: 0
 --- !u!212 &212790907159215998
 SpriteRenderer:
   m_ObjectHideFlags: 1
