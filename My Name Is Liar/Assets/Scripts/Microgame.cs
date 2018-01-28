@@ -38,7 +38,7 @@ public class Microgame : MonoBehaviour {
     [SerializeField]
     private float _InitialTimeRemaining = 10;
     [SerializeField]
-    private string _GameName = "Do this!";
+	private string _GameName = "Do this!";
     [SerializeField]
     private GameEvent _OnStartGame;
     [SerializeField]

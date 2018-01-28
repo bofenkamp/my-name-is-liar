@@ -11,6 +11,10 @@ public class MusicManager : MonoBehaviour {
 	[SerializeField]
 	private AudioClip MenuTheme, Overworld, DDR;
 
+	[SerializeField]
+	private AudioSource DDR_Source;
+	private int DDR_counter = 0;
+
 	private AudioSource AS;
 
 	// Use this for initialization
@@ -18,16 +22,16 @@ public class MusicManager : MonoBehaviour {
 		AS = GetComponent<AudioSource> ();
 
 		if (instance) {
-			if (AS.clip) {
+			if (instance.AS.clip != AS.clip && AS.playOnAwake) {
 				instance.AS.clip = AS.clip;
-				if (!instance.AS.isPlaying && AS.playOnAwake) {
-					instance.AS.Play ();
-				}
+				instance.AS.Play ();
 			}
 			if (!AS.playOnAwake) {
 				instance.AS.Stop ();
 			}
+			instance.AS.clip = AS.clip;
 			instance.AS.loop = AS.loop;
+			instance.DDR_Source = DDR_Source;
 			Destroy (gameObject);
 		} else {
 			instance = this;
@@ -46,6 +50,22 @@ public class MusicManager : MonoBehaviour {
 			AS.Play ();
 		} else if (newTrack == MusicTracks.DDR) {
 			AS.clip = DDR;
+			AS.Play ();
+		}
+	}
+
+	public void PlayingDDR(bool playing) {
+		if (playing) {
+			DDR_counter++;
+		} else {
+			DDR_counter--;
+		}
+
+		if (DDR_counter >= 1) {
+			AS.Pause ();
+			DDR_Source.Play ();
+		} else if (DDR_counter == 0) {
+			DDR_Source.Stop ();
 			AS.Play ();
 		}
 	}
