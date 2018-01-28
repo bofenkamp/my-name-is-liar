@@ -361,7 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Camera: {fileID: 1304490720}
-  _InitialTimeRemaining: 120
+  _InitialTimeRemaining: 15
   _GameName: Show me your moves!
   _OnStartGame:
     m_PersistentCalls:
@@ -412,6 +412,8 @@ MonoBehaviour:
   _timerSubtraction: 1
   _YellowDancingImage: {fileID: 1542391828}
   _BlueDancingImage: {fileID: 2143444551}
+  _HitsRequired: 30
+  _HitsVariance: 10
   camHeight: 0
   camWidth: 0
 --- !u!1 &2143444550

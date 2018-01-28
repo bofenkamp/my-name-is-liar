@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
         string scene_name = MicrogameNames[r];
 
         SceneManager.LoadSceneAsync(scene_name, LoadSceneMode.Additive);
-        _Players[(int)id].UIAnimator.SetBool("microgame", true);
+        _Players[(int)id].UIAnimator.SetTrigger("start");
         _LoadingMicrogames[(int)id] = scene_name;
 			
 		npcs [(int)id] = npc;
@@ -85,11 +85,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void DeregisterMicrogame(Microgame game) {
+    public void DeregisterMicrogame(Microgame game, bool won) {
         for (int x = 0; x < _LoadedMicrogames.Length; x++) {
             if (_LoadedMicrogames[x] == game)
             {
-                _Players[x].UIAnimator.SetBool("microgame", false);
+                if(won)
+                    _Players[x].UIAnimator.SetTrigger("win");
+                else
+                    _Players[x].UIAnimator.SetTrigger("lose");
                 npcs[x] = null;
                 _LoadedMicrogames[x] = null;
                 return;
