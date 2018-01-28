@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61741386637331972}
   - component: {fileID: 50791862710789860}
   - component: {fileID: 95483165786525258}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Woman NPC
   m_TagString: NPC
   m_Icon: {fileID: 0}

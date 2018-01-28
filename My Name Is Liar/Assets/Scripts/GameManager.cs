@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     private string[] _LoadingMicrogames;
     private GameObject[] npcs;
 
+    private List<NPC> _NPCList;
+
     public static readonly string[] MicrogameNames = {
         "Beer Pong", "Dance Off", "Lizard", "Dance", "Pushups", "GIRLS"
     };
@@ -101,11 +103,34 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public NPC GetClosestNPCToPoint(Vector2 pos, out float dist) {
+        float mindist = -1;
+        NPC minnpc = null;
+        foreach(var npc in _NPCList) {
+            float sqdist = Vector2.SqrMagnitude(pos - (Vector2)npc.transform.position);
+            if(sqdist < mindist || minnpc == null) {
+                mindist = sqdist;
+                minnpc = npc;
+            }
+        }
+        dist = mindist < 0 ? 0 : Mathf.Sqrt(mindist);
+        return minnpc;
+    }
+
+    public void RegisterNPC(NPC npc) {
+        _NPCList.Add(npc);
+    }
+
+    public bool DeregisterNPC(NPC npc) {
+        return _NPCList.Remove(npc);
+    }
+
     private void Awake() {
         _Players = new Player[2];
         _LoadedMicrogames = new Microgame[2];
         _LoadingMicrogames = new string[2];
         npcs = new GameObject[2];
+        _NPCList = new List<NPC>();
     }
 
     private void OnEnable()

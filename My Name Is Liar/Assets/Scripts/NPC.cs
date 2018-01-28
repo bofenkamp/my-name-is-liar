@@ -30,8 +30,17 @@ public class NPC : MonoBehaviour {
 
 	public bool inMinigame;
 
-	// Use this for initialization
-	void Start () {
+    private void OnEnable()
+    {
+        GameManager.Instance.RegisterNPC(this);
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.DeregisterNPC(this);
+    }
+
+    private void Start () {
 		transform.position = NearestTileCenter (transform.position);
 		targetDest = transform.position;
 
@@ -39,8 +48,7 @@ public class NPC : MonoBehaviour {
         _Animator = GetComponent<Animator>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	private void Update () {
 
 		//start walking in new direction
 		if (canMove && xSpeed == 0 && ySpeed == 0 && !inMinigame) {
@@ -162,6 +170,13 @@ public class NPC : MonoBehaviour {
         }
 	}
 
+    public void OnBegunMicrogame() {
+        xSpeed = 0f;
+        ySpeed = 0f;
+        inMinigame = true;
+        CancelInvoke();
+    }
+
 	void OnCollisionEnter2D (Collision2D coll) {
 
 		if (coll.gameObject.tag == "NPC" && !coll.gameObject.GetComponent<NPC>().inMinigame) {
@@ -173,19 +188,6 @@ public class NPC : MonoBehaviour {
 			CancelInvoke ();
 			Invoke ("AllowMovement", chatTime);
 
-		} else if (coll.gameObject.tag == "Player") {
-            var plr = coll.gameObject.GetComponent<Player>();
-
-            if(!GameManager.Instance.PlayingMicrogame(plr.PlayerNumber)) {
-                coll.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-                //          GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Kinematic;
-                PlayerID initiator = plr.PlayerNumber;
-                GameManager.Instance.LaunchMicrogame(initiator, gameObject);
-                xSpeed = 0f;
-                ySpeed = 0f;
-                inMinigame = true;
-                CancelInvoke();
-            }
 		}
 	}
 
