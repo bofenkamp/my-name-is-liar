@@ -17,3 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Minigames/Dance Off.unity
     guid: 6fc2e935f89d5fd43b9b60577257dbb1
+  - enabled: 1
+    path: Assets/Scenes/Minigames/Lizard.unity
+    guid: 898d67b2f08a340caaf9d70266d15a06

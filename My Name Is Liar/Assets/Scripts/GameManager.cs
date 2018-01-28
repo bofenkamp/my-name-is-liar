@@ -24,10 +24,10 @@ public class GameManager : MonoBehaviour
     private Player[] _Players;
     private Microgame[] _LoadedMicrogames;
     private string[] _LoadingMicrogames;
-    public GameObject[] npcs;
+    private GameObject[] npcs;
 
     public static readonly string[] MicrogameNames = {
-        "Beer Pong"
+        "Beer Pong", "Dance Off", "Lizard"
     };
 
 	public void RegisterPlayer(Player plr) {
@@ -40,6 +40,10 @@ public class GameManager : MonoBehaviour
 
     public Player GetPlayerWithID(PlayerID id) {
         return _Players[(int)id];
+    }
+
+    public GameObject GetNPCForPlayer(PlayerID id) {
+        return npcs[(int)id];
     }
 
 
@@ -86,6 +90,7 @@ public class GameManager : MonoBehaviour
             if (_LoadedMicrogames[x] == game)
             {
                 _Players[x].UIAnimator.SetBool("microgame", false);
+                npcs[x] = null;
                 _LoadedMicrogames[x] = null;
                 return;
             }
