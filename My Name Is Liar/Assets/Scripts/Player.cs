@@ -45,6 +45,8 @@ public class Player : MonoBehaviour {
 
     private Vector2 _MoveDir = Vector2.zero;
 
+    private Animator _Animator;
+
     public RenderTexture MicrogameTexture {
         get {
             return _MicrogameTexture;
@@ -76,12 +78,21 @@ public class Player : MonoBehaviour {
 
         int width = (int)_MicrogameSizer.sizeDelta.x + Screen.width / 2;
         MicrogameTexture = new RenderTexture(width, width, 24);
+
+        _Animator = GetComponent<Animator>();
 	}
 
     private void Update()
     {
         _MoveDir = new Vector2(GetAxis(PlayerAxis.Horizontal),
                                GetAxis(PlayerAxis.Vertical));
+
+        // Animate player
+        if (_Animator != null)
+        {
+            _Animator.SetFloat("horizontal", _MoveDir.x);
+            _Animator.SetFloat("vertical", _MoveDir.y);
+        }
 
         if (GameManager.Instance.PlayingMicrogame(PlayerNumber)) {
             int width = (int)_MicrogameSizer.sizeDelta.x + Screen.width / 2;
@@ -126,6 +137,7 @@ public class Player : MonoBehaviour {
             }
         }
 
+        // Move player
         _Body.MovePosition(_Body.position + dir * d);
     }
 
