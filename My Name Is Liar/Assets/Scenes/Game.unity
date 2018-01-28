@@ -734,7 +734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 005176a300bc20a47be837e201fa7a53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winMinigame: {fileID: 8300000, guid: 2494901ca8ccc8445bb9fa48a08cb7c0, type: 3}
+  winMinigame: {fileID: 8300000, guid: d794662ab91578a4c80f930d2354555a, type: 3}
   failMinigame: {fileID: 8300000, guid: f714ab69270954a459d0263f6e315416, type: 3}
 --- !u!82 &896968250
 AudioSource:

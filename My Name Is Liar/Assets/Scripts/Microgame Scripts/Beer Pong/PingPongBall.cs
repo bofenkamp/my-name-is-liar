@@ -22,6 +22,7 @@ public class PingPongBall : MonoBehaviour {
 		baseScale = transform.localScale;
 		transform.localScale = baseScale * 0.5f;
 		Vector2 Impulse = new Vector2(Random.Range(-70f, 70f), Random.Range (300f, 500f));
+		rb.AddTorque(Random.Range(-200f, 200f));
 		rb.AddForce (Impulse);
 	}
 
