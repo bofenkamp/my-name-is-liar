@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour {
 
 	public void StartGame() {
-		//TODO
-		SceneManager.LoadScene("Game");
+		//SceneManager.LoadScene("Map");
+		SceneManager.LoadScene ("Game", LoadSceneMode.Additive);
+		SceneManager.UnloadSceneAsync ("Main_Menu");
 	}
 
 	public void MainMenu() {
