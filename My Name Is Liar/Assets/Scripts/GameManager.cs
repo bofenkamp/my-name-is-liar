@@ -26,11 +26,53 @@ public class GameManager : MonoBehaviour
     private string[] _LoadingMicrogames;
     private GameObject[] npcs;
 
+    public float TimeElapsed {
+        get {
+            return Time.time - _StartTime;
+        }
+    }
+
+    public float TimeRemaining {
+        get {
+            return Mathf.Max(0, _GameLength - TimeElapsed);
+        }
+    }
+
+    private float _StartTime;
+    private const float _GameLength = 5;//60 * 5;
+
     private List<NPC> _NPCList;
 
     public static readonly string[] MicrogameNames = {
 		"Beer Pong", "Dance Off", "Lizard", "Dance", "Pushups", "GIRLS"
     };
+
+    private void Start() {
+        _StartTime = Time.time;
+    }
+
+    private bool _GameOver = false;
+
+    private void Update() {
+        if (TimeRemaining <= 0 && !_GameOver) {
+            _GameOver = true;
+            SceneManager.LoadScene("Winscreen");
+        }
+    }
+
+    public PlayerID WinningPlayer() {
+        int p1 = 0;
+        int p2 = 0;
+        foreach(var npc in _NPCList) {
+            if (npc.opinion1 > npc.opinion2)
+                p1++;
+            else if (npc.opinion1 < npc.opinion2)
+                p2++;
+        }
+        if (p1 > p2)
+            return PlayerID.One;
+        return PlayerID.Two;
+    }
 
 	public void RegisterPlayer(Player plr) {
         if(_Players[(int)plr.PlayerNumber] != null) {
@@ -47,7 +89,6 @@ public class GameManager : MonoBehaviour
     public GameObject GetNPCForPlayer(PlayerID id) {
         return npcs[(int)id];
     }
-
 
 	public void LaunchMicrogame(PlayerID id, GameObject npc) {
         if(PlayingMicrogame(id))
