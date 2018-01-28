@@ -6,6 +6,8 @@ public enum MusicTracks {None, MenuTheme, Overworld, DDR}
 
 public class MusicManager : MonoBehaviour {
 
+	public static MusicManager instance;
+
 	[SerializeField]
 	private AudioClip MenuTheme, Overworld, DDR;
 
@@ -14,6 +16,23 @@ public class MusicManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		AS = GetComponent<AudioSource> ();
+
+		if (instance) {
+			if (AS.clip) {
+				instance.AS.clip = AS.clip;
+				if (!instance.AS.isPlaying && AS.playOnAwake) {
+					instance.AS.Play ();
+				}
+			}
+			if (!AS.playOnAwake) {
+				instance.AS.Stop ();
+			}
+			instance.AS.loop = AS.loop;
+			Destroy (gameObject);
+		} else {
+			instance = this;
+			DontDestroyOnLoad (this);
+		}
 	}
 
 	public void SwitchMusic(MusicTracks newTrack) {
