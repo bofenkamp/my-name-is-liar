@@ -18,7 +18,7 @@ public class Girls : MonoBehaviour {
 	public float speedMin;
 	public float speedMax;
 
-	private int num;
+	[HideInInspector] public int num;
 
 	public GameObject girl;
 	public GameObject boy;
