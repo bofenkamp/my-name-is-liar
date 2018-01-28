@@ -28,27 +28,29 @@ public class RedSoloCup : MonoBehaviour {
 	}
 
 	void Update () {
-		if (playing) {
-			Vector2 velo = Vector2.zero;
-
-			// Horizontal movement
-			float cupRadius = GetComponent<BoxCollider2D> ().size.x;
-			float getAxis = microgame.Owner.GetAxis (PlayerAxis.Horizontal);
-			if (!((getAxis < 0 && (transform.position.x - cupRadius / 2) < -beerPongManager.camWidth / 2)
-			    || (getAxis > 0 && (transform.position.x + cupRadius / 2) > beerPongManager.camWidth / 2))) {
-				velo.x = cupSpeed * getAxis;
-			}
-
-			// Vertical movement
-			float height = GetComponent <BoxCollider2D> ().size.y * 2;
-			getAxis = microgame.Owner.GetAxis (PlayerAxis.Vertical);
-			if (!((getAxis < 0 && (transform.position.y - height / 2) < -beerPongManager.camHeight / 2)
-			    || (getAxis > 0 && (transform.position.y) > -beerPongManager.camWidth / 2 + height))) {
-				velo.y = cupSpeed * getAxis;
-			}
-
-			rb.velocity = velo;
+		if (!playing) {
+			return;
 		}
+
+		Vector2 velo = Vector2.zero;
+
+		// Horizontal movement
+		float cupRadius = GetComponent<BoxCollider2D> ().size.x;
+		float getAxis = microgame.Owner.GetAxis (PlayerAxis.Horizontal);
+		if (!((getAxis < 0 && (transform.position.x - cupRadius / 2) < -beerPongManager.camWidth / 2)
+		    || (getAxis > 0 && (transform.position.x + cupRadius / 2) > beerPongManager.camWidth / 2))) {
+			velo.x = cupSpeed * getAxis;
+		}
+
+		// Vertical movement
+		float height = GetComponent <BoxCollider2D> ().size.y * 2;
+		getAxis = microgame.Owner.GetAxis (PlayerAxis.Vertical);
+		if (!((getAxis < 0 && (transform.position.y - height / 2) < minPosY)
+			|| (getAxis > 0 && (transform.position.y) > minPosY + height / 2))) {
+			velo.y = cupSpeed * getAxis;
+		}
+
+		rb.velocity = velo;
 	}
 
 	// Destroy the ping pong ball and subtract from timer when it falls into the cup
