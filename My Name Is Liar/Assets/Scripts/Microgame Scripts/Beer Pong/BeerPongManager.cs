@@ -20,11 +20,9 @@ public class BeerPongManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		microgame = GetComponent<Microgame>();
-		PingPongBall.microgame = microgame;
 
 		// Get Main Camera height and width
 		camHeight = microgame.Camera.orthographicSize * 2f;
-		//camHeight = Camera.main.orthographicSize * 2f;
 		camWidth = camHeight * Camera.main.aspect;
 	}
 
@@ -35,7 +33,10 @@ public class BeerPongManager : MonoBehaviour {
 	
 	void spawnNewPPB() {
 		GameObject newPPB = Instantiate (PPBPrefab);
+
 		microgame.OnInstantiateObject (newPPB);
+		newPPB.GetComponent<PingPongBall>().beerPongManager = this;
+
 		float spawnX = 0.9f * Random.Range (-camWidth/2, camWidth/2);
 		newPPB.transform.position = new Vector3 (spawnX, 0f);
 	}

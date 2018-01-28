@@ -7,8 +7,8 @@ public class PingPongBall : MonoBehaviour {
 	[SerializeField]
 	private float scalingSpeed;
 
-	public static Microgame microgame;
-	private BeerPongManager beerPongManager;
+	[HideInInspector]
+	public BeerPongManager beerPongManager;
 	private Rigidbody2D rb;
 	private CircleCollider2D cc;
 
@@ -16,7 +16,6 @@ public class PingPongBall : MonoBehaviour {
 
 	// Rendering/Transform initialization
 	void Start () {
-		beerPongManager = microgame.GetComponent<BeerPongManager> ();
 		rb = GetComponent<Rigidbody2D> ();
 		cc = GetComponent<CircleCollider2D> ();
 
