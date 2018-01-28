@@ -10,9 +10,6 @@ public class Player : MonoBehaviour {
     public PlayerID PlayerNumber {
         get { return _PlayerNumber; }
     }
-    public RenderTexture MicrogameTexture {
-        get { return _MicrogameTexture; }
-    }
     public Animator UIAnimator {
         get { return _UIAnimator; }
     }
@@ -33,20 +30,36 @@ public class Player : MonoBehaviour {
 
     [Header("UI Objects")]
     [SerializeField]
-    private RenderTexture _MicrogameTexture;
+    private RawImage _MicrogameImage;
     [SerializeField]
     private Animator _UIAnimator;
     [SerializeField]
     private TextMeshProUGUI _TimeRemaining;
     [SerializeField]
     private TextMeshProUGUI _MicrogameTitle;
+    [SerializeField]
+    private RectTransform _MicrogameSizer;
 
     private Rigidbody2D _Body;
     private RaycastHit2D[] _Hits;
 
     private Vector2 _MoveDir = Vector2.zero;
 
-	[HideInInspector] public bool inMicrogame = false;
+    public RenderTexture MicrogameTexture {
+        get {
+            return _MicrogameTexture;
+        }
+        private set {
+            if(_MicrogameTexture != null)
+                _MicrogameTexture.Release();
+            
+            _MicrogameTexture = value;
+            _MicrogameImage.texture = value;
+
+            GameManager.Instance.GetMicrogameForPlayer(PlayerNumber).RefetchMicrogameTexture();
+        }
+    }
+    private RenderTexture _MicrogameTexture;
 
 	private void Start ()
     {
@@ -58,12 +71,22 @@ public class Player : MonoBehaviour {
             _Camera.rect = new Rect(0, 0, 0.5f, 1);
         else
             _Camera.rect = new Rect(0.5f, 0, 0.5f, 1);
+
+        int width = (int)_MicrogameSizer.sizeDelta.x + Screen.width / 2;
+        MicrogameTexture = new RenderTexture(width, width, 24);
 	}
 
     private void Update()
     {
         _MoveDir = new Vector2(GetAxis(PlayerAxis.Horizontal),
                                GetAxis(PlayerAxis.Vertical));
+
+        if (GameManager.Instance.PlayingMicrogame(PlayerNumber)) {
+            int width = (int)_MicrogameSizer.sizeDelta.x + Screen.width / 2;
+
+            if (width != MicrogameTexture.width || width != MicrogameTexture.height)
+                MicrogameTexture = new RenderTexture(width, width, 24);
+        }
     }
 
     private void FixedUpdate()
