@@ -24,6 +24,10 @@ public class Player : MonoBehaviour {
     [SerializeField]
     private PlayerID _PlayerNumber;
     [SerializeField]
+    private float _NPCConversationDistance = 2f;
+    [SerializeField]
+    private Navi _Navi;
+    [SerializeField]
     private float _MoveSpeed = 1f;
     [SerializeField]
     private Camera _Camera;
@@ -99,6 +103,27 @@ public class Player : MonoBehaviour {
 
             if (width != MicrogameTexture.width || width != MicrogameTexture.height)
                 MicrogameTexture = new RenderTexture(width, width, 24);
+
+            if(_Navi != null)
+                _Navi.Following = null;
+        } else {
+            // Find a target to talk to
+            float dist;
+            var gm = GameManager.Instance.GetClosestNPCToPoint(transform.position, out dist);
+
+            if (dist <= _NPCConversationDistance)
+            {
+                if(GetButtonDown(PlayerButton.Confirm)) {
+                    gm.OnBegunMicrogame();
+                    GameManager.Instance.LaunchMicrogame(PlayerNumber, gm.gameObject);
+                }
+
+                // Enable Navi
+                if (_Navi != null)
+                    _Navi.Following = gm.gameObject;
+            }
+            else if (_Navi != null)
+                _Navi.Following = null;
         }
     }
 
