@@ -23,8 +23,12 @@ public class GameManager : MonoBehaviour
 
     private Player[] _Players;
     private Microgame[] _LoadedMicrogames;
-    private bool[] _PlayerWaitingForGame;
-	public GameObject[] npcs;
+    private string[] _LoadingMicrogames;
+    public GameObject[] npcs;
+
+    public static readonly string[] MicrogameNames = {
+        "Beer Pong"
+    };
 
 	public void RegisterPlayer(Player plr) {
         if(_Players[(int)plr.PlayerNumber] != null) {
@@ -43,11 +47,14 @@ public class GameManager : MonoBehaviour
         if(PlayingMicrogame(id))
             return;
 
-        _PlayerWaitingForGame[(int)id] = true;
-        SceneManager.LoadSceneAsync("Beer Pong", LoadSceneMode.Additive);
+        // randomly pick a microgame
+        int r = Random.Range(0, MicrogameNames.Length);
+        string scene_name = MicrogameNames[r];
+
+        SceneManager.LoadSceneAsync(scene_name, LoadSceneMode.Additive);
         _Players[(int)id].UIAnimator.SetBool("microgame", true);
-		if (npcs == null)
-			npcs = new GameObject[2];
+        _LoadingMicrogames[(int)id] = scene_name;
+			
 		npcs [(int)id] = npc;
     }
 
@@ -60,12 +67,14 @@ public class GameManager : MonoBehaviour
     }
 
     public void RegisterMicrogame(Microgame game) {
-        for (int x = 0; x < _PlayerWaitingForGame.Length; x++) {
-            if (!_PlayerWaitingForGame[x])
+        var name = game.gameObject.scene.name;
+
+        for (int x = 0; x < _LoadingMicrogames.Length; x++) {
+            if (!name.Equals(_LoadingMicrogames[x]))
                 continue;
             Debug.Assert(_LoadedMicrogames[x] == null);
 
-            _PlayerWaitingForGame[x] = false;
+            _LoadingMicrogames[x] = null;
             _LoadedMicrogames[x] = game;
             game.StartMicrogame(_Players[x]);
             return;
@@ -86,7 +95,8 @@ public class GameManager : MonoBehaviour
     private void Awake() {
         _Players = new Player[2];
         _LoadedMicrogames = new Microgame[2];
-        _PlayerWaitingForGame = new bool[2];
+        _LoadingMicrogames = new string[2];
+        npcs = new GameObject[2];
     }
 
     private void OnEnable()
