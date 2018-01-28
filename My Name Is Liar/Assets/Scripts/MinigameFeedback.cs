@@ -33,11 +33,14 @@ public class MinigameFeedback : MonoBehaviour {
 		goodFeedback.Add ("Awesome!");
 		goodFeedback.Add ("Sick dude!");
 		goodFeedback.Add ("Woah! Nice!");
+		goodFeedback.Add ("Tubular");
+		goodFeedback.Add ("Party on!");
 
 		badFeedback = new List<string> ();
 		badFeedback.Add ("That was lame");
 		badFeedback.Add ("What was that, man...");
 		badFeedback.Add ("So much for the \"Party King\"");
+		badFeedback.Add ("Idk bro, maybe next time");
 	}
 	
 	public void feedback(PlayerID playerNum, bool good) {
