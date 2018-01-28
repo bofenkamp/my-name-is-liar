@@ -236,7 +236,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   min: 6
-  max: 11
+  max: 9
+  boyMin: 1
+  boyMax: 3
   minX: -3.5
   maxX: 6
   minY: -3
@@ -244,6 +246,7 @@ MonoBehaviour:
   speedMin: 6
   speedMax: 10
   girl: {fileID: 1703760078128578, guid: e10ebc9f34249469785f407f62d5515e, type: 2}
+  boy: {fileID: 1459536595496664, guid: c9bdcda4233d64735b1fc30272b2fabb, type: 2}
   gameStarted: 0
 --- !u!114 &692319921
 MonoBehaviour:
