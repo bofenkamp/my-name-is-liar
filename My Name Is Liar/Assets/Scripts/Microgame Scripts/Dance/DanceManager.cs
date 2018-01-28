@@ -20,6 +20,8 @@ public class DanceManager : MonoBehaviour {
     [SerializeField]
     private int _MissesAllowed = 5;
     [SerializeField]
+    private float _TimeTolerance = 0.05f;
+    [SerializeField]
     private float _MinSpeed = 2;
     [SerializeField]
     private float _MaxSpeed = 4;
@@ -31,6 +33,8 @@ public class DanceManager : MonoBehaviour {
     private float _SpawnDelay = 1.5f;
     [SerializeField]
     private float _GameLength = 8.5f;
+    [SerializeField]
+    private Transform _SpawnOnHit;
 
     [SerializeField]
     private float _ArrowTravelDistance = 3;
@@ -41,6 +45,9 @@ public class DanceManager : MonoBehaviour {
 
     public void OnHit(DanceArrow arr) {
         Destroy(arr.gameObject);
+
+        var go = Instantiate(_SpawnOnHit, arr.transform.position, Quaternion.identity);
+        _Microgame.OnInstantiateObject(go.gameObject);
     }
 
     public void OnMiss(DanceArrow arr) {
@@ -86,8 +93,9 @@ public class DanceManager : MonoBehaviour {
             arr.Game = _Microgame;
             arr.Manager = this;
             arr.DistanceToTravel = _ArrowTravelDistance;
+            arr.SweetspotInterval = _TimeTolerance;
 
-            _NextSpawnTime = Time.time + Random.Range(-_MaxInterval, _MaxInterval);
+            _NextSpawnTime = Time.time + Random.Range(_MinInterval, _MaxInterval);
         }
 	}
 

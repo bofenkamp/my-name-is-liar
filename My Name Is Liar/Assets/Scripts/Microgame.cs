@@ -137,8 +137,8 @@ public class Microgame : MonoBehaviour {
         // TODO
         GameManager.Instance.DeregisterMicrogame(this, won);
         _OnEndGame.Invoke();
-        _Camera.enabled = false;
-        SceneManager.UnloadSceneAsync(gameObject.scene);
+        var aso = SceneManager.UnloadSceneAsync(gameObject.scene);
+        aso.completed += (obj) => Owner.UIAnimator.SetBool("loaded", false);
     }
 
     public void AddToTime(float secs) {
