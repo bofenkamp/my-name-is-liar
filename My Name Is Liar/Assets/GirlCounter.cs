@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class GirlCounter : MonoBehaviour {
 
-	public SpriteRenderer up;
-	public SpriteRenderer down;
+	public Image up;
+	public Image down;
 
 	public Sprite w;
 	public Sprite s;
