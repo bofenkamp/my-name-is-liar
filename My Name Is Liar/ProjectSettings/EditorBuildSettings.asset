@@ -4,4 +4,37 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Main_Menu.unity
+    guid: 759ad8287e362304fb78a0a730ea510c
+  - enabled: 1
+    path: Assets/Scenes/Game.unity
+    guid: 0285db61a6b93461c809c8d3097990f3
+  - enabled: 1
+    path: Assets/Scenes/Map.unity
+    guid: 67412c32fefb04299906f664dea3e0d8
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: b3d577b2b475eae429d66c34bf800582
+  - enabled: 1
+    path: Assets/Scenes/Minigames/Dance.unity
+    guid: 6f22ca9a03e6a4a09bfd7c36d549b7ce
+  - enabled: 1
+    path: Assets/Scenes/Minigames/Beer Pong.unity
+    guid: 0ad74374320b87846807f263ed795f13
+  - enabled: 1
+    path: Assets/Scenes/Minigames/Dance Off.unity
+    guid: 6fc2e935f89d5fd43b9b60577257dbb1
+  - enabled: 1
+    path: Assets/Scenes/Minigames/Lizard.unity
+    guid: 898d67b2f08a340caaf9d70266d15a06
+  - enabled: 1
+    path: Assets/Scenes/Minigames/Pushups.unity
+    guid: 4372cf20d761ba646a56575567d106e8
+  - enabled: 1
+    path: Assets/Scenes/Minigames/GIRLS.unity
+    guid: 20f5afdfd44f64149a408ca198637de4
+  - enabled: 1
+    path: Assets/Scenes/Winscreen.unity
+    guid: 1c2302b5772fa4dc8bac4bc02f63950d
