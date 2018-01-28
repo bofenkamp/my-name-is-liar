@@ -30,8 +30,6 @@ public class DanceOffManager : MonoBehaviour {
 		_microgame = GetComponent<Microgame>();
 		_currentDirection = SpriteDirection.right;
 
-		print (_microgame == null);
-		print (_microgame.Owner == null);
 		if (_microgame.Owner.PlayerNumber == PlayerID.One) {
 			_YellowDancingImage.gameObject.SetActive (true);
 		} else {
@@ -57,9 +55,11 @@ public class DanceOffManager : MonoBehaviour {
 
 		float getAxis = _microgame.Owner.GetAxis (PlayerAxis.Horizontal);
 		if (getAxis < 0 && _currentDirection == SpriteDirection.right) {
+			flipImage ();
 			_currentDirection = SpriteDirection.left;
             _HitsRemaining--;
 		} else if (getAxis > 0 && _currentDirection == SpriteDirection.left) {
+			flipImage ();
 			_currentDirection = SpriteDirection.right;
             _HitsRemaining--;
 		}
