@@ -11,6 +11,6 @@ public class MapLoader : MonoBehaviour {
 	}
 
 	void LoadMap() {
-		var aso = SceneManager.LoadSceneAsync("Map", LoadSceneMode.Additive);
+		var Map_aso = SceneManager.LoadSceneAsync("Map", LoadSceneMode.Additive);
 	}
 }
