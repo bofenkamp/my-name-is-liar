@@ -29,3 +29,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Minigames/Pushups.unity
     guid: 4372cf20d761ba646a56575567d106e8
+  - enabled: 1
+    path: Assets/Scenes/Minigames/GIRLS.unity
+    guid: 20f5afdfd44f64149a408ca198637de4
