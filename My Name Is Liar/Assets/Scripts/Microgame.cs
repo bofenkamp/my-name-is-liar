@@ -113,6 +113,7 @@ public class Microgame : MonoBehaviour {
             layer = 8;
         else
             layer = 9;
+        SceneManager.MoveGameObjectToScene(go, gameObject.scene);
         SetLayerRecursive(go, layer);
     } 
 

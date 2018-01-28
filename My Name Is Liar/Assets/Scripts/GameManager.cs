@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     private GameObject[] npcs;
 
     public static readonly string[] MicrogameNames = {
-        "Beer Pong", "Dance Off", "Lizard"
+        "Dance"//"Beer Pong", "Dance Off", "Lizard"
     };
 
 	public void RegisterPlayer(Player plr) {
@@ -45,7 +45,6 @@ public class GameManager : MonoBehaviour
     public GameObject GetNPCForPlayer(PlayerID id) {
         return npcs[(int)id];
     }
-
 
 	public void LaunchMicrogame(PlayerID id, GameObject npc) {
         if(PlayingMicrogame(id))
