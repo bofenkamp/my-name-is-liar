@@ -21,6 +21,9 @@ public class NPC : MonoBehaviour {
 	private Vector2 targetDest;
 	private bool justTalked = false; //did they just finish talking to someone?
 
+    private Rigidbody2D _Body;
+    private Animator _Animator;
+
 	public float tileSize = .16f;
 
 	public float chatTime; //time NPCs spend talking to each other
@@ -29,10 +32,11 @@ public class NPC : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
 		transform.position = NearestTileCenter (transform.position);
 		targetDest = transform.position;
-		
+
+        _Body = GetComponent<Rigidbody2D>();
+        _Animator = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -151,8 +155,11 @@ public class NPC : MonoBehaviour {
 
 		}
 
-		GetComponent<Rigidbody2D> ().velocity = new Vector2 (xSpeed, ySpeed);
-		
+        _Body.velocity = new Vector2 (xSpeed, ySpeed);
+        if(_Animator != null) {
+            _Animator.SetFloat("horizontal", xSpeed);
+            _Animator.SetFloat("vertical", ySpeed);
+        }
 	}
 
 	void OnCollisionEnter2D (Collision2D coll) {
