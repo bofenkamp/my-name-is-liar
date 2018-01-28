@@ -13,6 +13,7 @@ public class GirlCounter : MonoBehaviour {
 
 	private KeyCode more;
 	private KeyCode less;
+	private KeyCode confirm;
 	public Microgame controller;
 
 	private int num = 0;
@@ -27,11 +28,13 @@ public class GirlCounter : MonoBehaviour {
 			down.sprite = s;
 			more = KeyCode.W;
 			less = KeyCode.S;
+			confirm = KeyCode.D;
 
 		} else {
 
 			more = KeyCode.UpArrow;
 			less = KeyCode.DownArrow;
+			confirm = KeyCode.RightArrow;
 
 		}
 
@@ -50,6 +53,15 @@ public class GirlCounter : MonoBehaviour {
 		if (Input.GetKeyDown (less)) {
 			num -= 1;
 			text.text = num.ToString ();
+		}
+
+		if (Input.GetKeyDown (confirm)) {
+			float numGirls = controller.GetComponent<Girls> ().num;
+			if (numGirls == num)
+				controller.EndMicrogame (true);
+			else
+				controller.EndMicrogame (false);
+
 		}
 		
 	}
