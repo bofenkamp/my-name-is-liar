@@ -312,8 +312,8 @@ MonoBehaviour:
   max: 8
   boyMin: 1
   boyMax: 3
-  minX: -6
-  maxX: 6
+  minX: -3.5
+  maxX: 4.5
   minY: -3
   maxY: 3
   speedMin: 6
