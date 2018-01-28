@@ -19,8 +19,6 @@ public class FindLizard : MonoBehaviour {
 
 	void Start () {
 
-		MakeQuiz ();
-
 	}
 
 	void Update () {
@@ -64,9 +62,9 @@ public class FindLizard : MonoBehaviour {
 		wrongAnswers.Add ("Some rocks, but not all of them");
 		wrongAnswers.Add ("A burrito wearing makeup");
 		wrongAnswers.Add ("The complete works of William Shakespeare");
-		wrongAnswers.Add ("A salamander");
-		wrongAnswers.Add ("A human lying about being a lizard");
-		wrongAnswers.Add ("A shiny new car!!!");
+		wrongAnswers.Add ("A spider");
+		wrongAnswers.Add ("A human lying about being a beetle");
+		wrongAnswers.Add ("A shiny new lexus!!!");
 		wrongAnswers.Add ("An inexplicable flag of Kyrgyzstan");
 		wrongAnswers.Add ("Your butt");
 		wrongAnswers.Add ("A person dressed as a lizard");
