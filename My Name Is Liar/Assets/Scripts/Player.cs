@@ -143,6 +143,21 @@ public class Player : MonoBehaviour {
         }
         return 0;
     }
+
+    public bool GetButtonDown(PlayerButton button) {
+        if(PlayerNumber == PlayerID.One) {
+            if (button == PlayerButton.Confirm)
+                return Input.GetButtonDown("Confirm");
+            if (button == PlayerButton.Cancel)
+                return Input.GetButtonDown("Cancel");
+        } else {
+            if (button == PlayerButton.Confirm)
+                return Input.GetButtonDown("Confirm 2");
+            if (button == PlayerButton.Cancel)
+                return Input.GetButtonDown("Cancel 2");
+        }
+        return false;
+    }
 }
 
 public enum PlayerID
@@ -153,4 +168,9 @@ public enum PlayerID
 public enum PlayerAxis
 {
     Horizontal, Vertical
+}
+
+public enum PlayerButton
+{
+    Confirm, Cancel
 }

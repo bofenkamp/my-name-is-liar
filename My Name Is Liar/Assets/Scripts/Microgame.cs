@@ -134,7 +134,7 @@ public class Microgame : MonoBehaviour {
         }
 		
         // TODO
-        GameManager.Instance.DeregisterMicrogame(this);
+        GameManager.Instance.DeregisterMicrogame(this, won);
         _OnEndGame.Invoke();
         _Camera.enabled = false;
         SceneManager.UnloadSceneAsync(gameObject.scene);
