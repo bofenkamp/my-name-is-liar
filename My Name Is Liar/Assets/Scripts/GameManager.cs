@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     private List<NPC> _NPCList;
 
     public static readonly string[] MicrogameNames = {
-        "Beer Pong", "Dance Off", "Lizard", "Dance", "Pushups", "GIRLS"
+		"Beer Pong", "Dance Off", "Lizard", "Dance", "Pushups", "GIRLS"
     };
 
 	public void RegisterPlayer(Player plr) {

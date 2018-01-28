@@ -120,6 +120,13 @@ public class Microgame : MonoBehaviour {
 	public void EndMicrogame(bool won) {
 		Owner.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 
+		//Play Audio
+		if (won) {
+			SoundFX_Manager.instance.playClip (SoundFX.winMinigame);
+		} else {
+			SoundFX_Manager.instance.playClip (SoundFX.failMinigame);
+		}
+
         //change the npc's opinion based on results
         var npcobj = GameManager.Instance.GetNPCForPlayer(Owner.PlayerNumber);
         var npc = npcobj == null ? null : npcobj.GetComponent<NPC>();
