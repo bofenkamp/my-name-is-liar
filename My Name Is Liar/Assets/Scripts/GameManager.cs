@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
     }
 
     public bool PlayingMicrogame(PlayerID id) {
-        return _LoadedMicrogames[(int)id] != null;
+        return _LoadedMicrogames[(int)id] != null || _LoadingMicrogames[(int)id] != null;
     }
 
     public Microgame GetMicrogameForPlayer(PlayerID id) {
