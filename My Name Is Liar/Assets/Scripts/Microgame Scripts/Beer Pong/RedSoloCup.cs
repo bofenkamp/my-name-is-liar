@@ -45,7 +45,7 @@ public class RedSoloCup : MonoBehaviour {
 		// Vertical movement
 		float height = GetComponent <BoxCollider2D> ().size.y * 2;
 		getAxis = microgame.Owner.GetAxis (PlayerAxis.Vertical);
-		if (!((getAxis < 0 && (transform.position.y - height / 2) < minPosY)
+		if (!((getAxis < 0 && (transform.position.y) < minPosY)
 			|| (getAxis > 0 && (transform.position.y) > minPosY + height / 2))) {
 			velo.y = cupSpeed * getAxis;
 		}

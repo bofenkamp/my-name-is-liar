@@ -123,8 +123,10 @@ public class Microgame : MonoBehaviour {
 		//Play Audio
 		if (won) {
 			SoundFX_Manager.instance.playClip (SoundFX.winMinigame);
+			MinigameFeedback.instance.feedback (Owner.PlayerNumber, true);
 		} else {
 			SoundFX_Manager.instance.playClip (SoundFX.failMinigame);
+			MinigameFeedback.instance.feedback (Owner.PlayerNumber, false);
 		}
 
         //change the npc's opinion based on results
