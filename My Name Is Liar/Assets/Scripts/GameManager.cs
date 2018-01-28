@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     }
 
     private float _StartTime;
-    private const float _GameLength = 5;//60 * 5;
+    private const float _GameLength = 60 * 5;
 
     private List<NPC> _NPCList;
 
