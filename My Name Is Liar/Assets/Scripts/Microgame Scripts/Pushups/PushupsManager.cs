@@ -7,7 +7,7 @@ public enum PushupPosition {Up, Down}
 public class PushupsManager : MonoBehaviour {
 
     [SerializeField]
-    private int _PushupsRequired = 5;
+    private int _PushupsRequired = 8;
     [SerializeField]
     private int _PushupVariance = 6;
 
@@ -23,9 +23,10 @@ public class PushupsManager : MonoBehaviour {
     private int _PushupsRemaining;
 
 	// Paramters
-	private float scaleSpeed = 60f;
+	private float scaleUpSpeed = 150f;
+	private float scaleDownSpeed = 60f;
 	private float rangeRadius = 6f;
-	private float pushupTime = 0.5f;
+	private float pushupTime = 0.6f;
 	private float meterHeightMult = 0.046f;
 
 	private float scale;
@@ -38,11 +39,8 @@ public class PushupsManager : MonoBehaviour {
 
 		_Man.sprite = _UpPosition;
 
+		randomizeRange();
         _PushupsRemaining = _PushupsRequired + Random.Range(0, _PushupVariance);
-
-		/*Testing:
-		scale = 56f;
-		_Marker.transform.position = _Meter.transform.position + new Vector3(0f, (scale - 50f) * meterHeightMult, -2f); */
 	}
 
 	// Called when game actually begins
@@ -59,24 +57,20 @@ public class PushupsManager : MonoBehaviour {
 		float getAxis = _microgame.Owner.GetAxis (PlayerAxis.Vertical);
 		if (getAxis > 0) {
 			if (scale < 100) {
-				scale += scaleSpeed * Time.deltaTime;
+				scale += scaleUpSpeed * Time.deltaTime;
 			}
 		} else {
 			if (scale > 0) {
-				scale -= scaleSpeed * Time.deltaTime;
+				scale -= scaleDownSpeed * Time.deltaTime;
 			}
 		}
 		_Marker.transform.position = _Meter.transform.position + new Vector3 (0f, (scale - 50f) * meterHeightMult, -2f); 
 
-      	// Range movement - TODO
-		rangeLocation = 50f;
-		//Random.Range(5f, 95f);
-		_Range.transform.position = _Meter.transform.position + new Vector3(0f, (rangeLocation - 50f) * meterHeightMult, -1f);
-
-		if (rangeLocation - rangeRadius < scale && scale < rangeLocation + rangeRadius) {
+		if (rangeLocation - rangeRadius <= scale && scale <= rangeLocation + rangeRadius) {
 			doPushups ();
 		}
 		pushupCooldown -= Time.deltaTime;
+		maybeRandomizeRange (0.0025f);
 	}
 
 	void doPushups() {
@@ -99,5 +93,19 @@ public class PushupsManager : MonoBehaviour {
 		if (_PushupsRemaining <= 0 && position == PushupPosition.Down) {
 			_microgame.EndMicrogame(true);
 		}
+
+		maybeRandomizeRange (0.3f);
+	}
+
+	void maybeRandomizeRange(float chance) {
+		float roll = Random.Range (0f, 1f);
+		if (roll <= chance) {
+			randomizeRange ();
+		}
+	}
+
+	void randomizeRange() {
+		rangeLocation = Random.Range(7f, 94f);
+		_Range.transform.position = _Meter.transform.position + new Vector3(0f, (rangeLocation - 50f) * meterHeightMult, -1f);
 	}
 }
