@@ -254,17 +254,17 @@ Prefab:
     - target: {fileID: 212943386256478338, guid: 8bf468915d2954e99860f8a56880f823,
         type: 2}
       propertyPath: m_Color.r
-      value: 0.35686275
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 212943386256478338, guid: 8bf468915d2954e99860f8a56880f823,
         type: 2}
       propertyPath: m_Color.b
-      value: 0.7960785
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 212943386256478338, guid: 8bf468915d2954e99860f8a56880f823,
         type: 2}
       propertyPath: m_Color.g
-      value: 0.49803925
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114098230510577848, guid: 8bf468915d2954e99860f8a56880f823,
         type: 2}
@@ -306,6 +306,12 @@ Prefab:
       propertyPath: _MicrogameImage
       value: 
       objectReference: {fileID: 1650221884}
+    - target: {fileID: 212943386256478338, guid: 8bf468915d2954e99860f8a56880f823,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e9128263409aa443a83e4c2a41382a41,
+        type: 3}
     m_RemovedComponents:
     - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: 8bf468915d2954e99860f8a56880f823, type: 2}
@@ -724,6 +730,28 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!1 &1142216190 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1224126553514038, guid: 8bf468915d2954e99860f8a56880f823,
+    type: 2}
+  m_PrefabInternal: {fileID: 198393157}
+--- !u!95 &1142216196
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1142216190}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 79dffb2fc80254aeb845f52df5da4396, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1312525995
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,6 +1058,28 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1423805560}
+--- !u!1 &1427835833 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1224126553514038, guid: 8bf468915d2954e99860f8a56880f823,
+    type: 2}
+  m_PrefabInternal: {fileID: 1776492442}
+--- !u!95 &1427835834
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1427835833}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ea02fdb2f4e3a4a0aad16a5489784cd4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1448407837
 GameObject:
   m_ObjectHideFlags: 0
@@ -1513,18 +1563,29 @@ Prefab:
       objectReference: {fileID: 1521634381}
     - target: {fileID: 212943386256478338, guid: 8bf468915d2954e99860f8a56880f823,
         type: 2}
-      propertyPath: m_Color.r
-      value: 0.85098046
-      objectReference: {fileID: 0}
-    - target: {fileID: 212943386256478338, guid: 8bf468915d2954e99860f8a56880f823,
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 53600830b9065413db034fd87f767b0d,
+        type: 3}
+    - target: {fileID: 61306109375196496, guid: 8bf468915d2954e99860f8a56880f823,
         type: 2}
-      propertyPath: m_Color.g
-      value: 0.82745105
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.8888889
       objectReference: {fileID: 0}
-    - target: {fileID: 212943386256478338, guid: 8bf468915d2954e99860f8a56880f823,
+    - target: {fileID: 61306109375196496, guid: 8bf468915d2954e99860f8a56880f823,
         type: 2}
-      propertyPath: m_Color.b
-      value: 0.40000004
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.3333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 61306109375196496, guid: 8bf468915d2954e99860f8a56880f823,
+        type: 2}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61306109375196496, guid: 8bf468915d2954e99860f8a56880f823,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8bf468915d2954e99860f8a56880f823, type: 2}

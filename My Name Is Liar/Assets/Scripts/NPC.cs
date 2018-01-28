@@ -25,11 +25,6 @@ public class NPC : MonoBehaviour {
 
 	public float chatTime; //time NPCs spend talking to each other
 
-//	public GameObject lIndicate;
-//	public GameObject rIndicate;
-//	public GameObject uIndicate;
-//	public GameObject dIndicate;
-
 	public bool inMinigame;
 
 	// Use this for initialization
@@ -91,23 +86,6 @@ public class NPC : MonoBehaviour {
 				viableDirections.Add (2);
 			if (downDist > 0 && dir != 2)
 				viableDirections.Add (4);
-
-//			if (viableDirections.Contains (1))
-//				lIndicate.SetActive (true);
-//			else
-//				lIndicate.SetActive (false);
-//			if (viableDirections.Contains (2))
-//				uIndicate.SetActive (true);
-//			else
-//				uIndicate.SetActive (false);
-//			if (viableDirections.Contains (3))
-//				rIndicate.SetActive (true);
-//			else
-//				rIndicate.SetActive (false);
-//			if (viableDirections.Contains (4))
-//				dIndicate.SetActive (true);
-//			else
-//				dIndicate.SetActive (false);
 
 			//choose direction
 			if (viableDirections.Count == 0) { //reached dead end, turn around
@@ -272,7 +250,6 @@ public class NPC : MonoBehaviour {
 
 		//start moving again
 		canMove = true;
-//		transform.position = NearestTileCenter (transform.position);
 		targetDest = NearestTileCenter (transform.position);
 		transform.rotation = Quaternion.identity;
 
