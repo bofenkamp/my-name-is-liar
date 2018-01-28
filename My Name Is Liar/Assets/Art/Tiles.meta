@@ -1,7 +1,11 @@
 fileFormatVersion: 2
 guid: fd9f835e7d5b34bcfaa09eabfaa21b57
 folderAsset: yes
+<<<<<<< HEAD
 timeCreated: 1517118904
+=======
+timeCreated: 1517106513
+>>>>>>> npc
 licenseType: Free
 DefaultImporter:
   externalObjects: {}

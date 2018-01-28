@@ -718,7 +718,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Camera: {fileID: 1780154087}
   _InitialTimeRemaining: 10
-  _GameName: FIND LIZARD!!
+  _GameName: FIND BEETLE!!
   _OnStartGame:
     m_PersistentCalls:
       m_Calls:
