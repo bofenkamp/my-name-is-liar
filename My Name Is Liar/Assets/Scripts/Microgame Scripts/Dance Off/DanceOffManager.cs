@@ -7,21 +7,22 @@ public enum SpriteDirection {left, right}
 public class DanceOffManager : MonoBehaviour {
 
 	[SerializeField]
-	private float _timerSubtraction;
-	[SerializeField]
 	private SpriteRenderer _YellowDancingImage, _BlueDancingImage;
+    [SerializeField]
+    private int _HitsRequired = 30;
+    [SerializeField]
+    private int _HitsVariance = 10;
+
 	private SpriteRenderer _currentImage;
 	private SpriteDirection _currentDirection;
 
 	private Microgame _microgame;
 	private bool playing = false;
 
+    private int _HitsRemaining;
+
 	[HideInInspector]
 	public float camHeight, camWidth;
-
-	public float timerSubtraction{
-		get { return _timerSubtraction; }
-	}
 
 	// Use this for initialization
 	void Start () {
@@ -34,6 +35,8 @@ public class DanceOffManager : MonoBehaviour {
 			_currentImage = _BlueDancingImage;
 		}
 		_currentImage.gameObject.SetActive (true);
+
+        _HitsRemaining = _HitsRequired + Random.Range(0, _HitsVariance);
 
 		// Get Main Camera height and width
 		camHeight = _microgame.Camera.orthographicSize * 2f;
@@ -54,11 +57,15 @@ public class DanceOffManager : MonoBehaviour {
 		if (getAxis < 0 && _currentDirection == SpriteDirection.right) {
 			_currentImage.flipX = !_currentImage.flipX;
 			_currentDirection = SpriteDirection.left;
-			_microgame.AddToTime (-timerSubtraction);
+            _HitsRemaining--;
 		} else if (getAxis > 0 && _currentDirection == SpriteDirection.left) {
 			_currentImage.flipX = !_currentImage.flipX;
 			_currentDirection = SpriteDirection.right;
-			_microgame.AddToTime (-timerSubtraction);
+            _HitsRemaining--;
 		}
+
+        if(_HitsRemaining <= 0) {
+            _microgame.EndMicrogame(true);
+        }
 	}
 }
