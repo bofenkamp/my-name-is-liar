@@ -7,7 +7,7 @@ public enum PushupPosition {Up, Down}
 public class PushupsManager : MonoBehaviour {
 
     [SerializeField]
-    private int _PushupsRequired = 8;
+    private int _PushupsRequired = 14;
     [SerializeField]
     private int _PushupVariance = 6;
 
@@ -26,7 +26,7 @@ public class PushupsManager : MonoBehaviour {
 	private float scaleUpSpeed = 150f;
 	private float scaleDownSpeed = 60f;
 	private float rangeRadius = 6f;
-	private float pushupTime = 0.6f;
+	private float pushupTime = 0.4f;
 	private float meterHeightMult = 0.046f;
 
 	private float scale;

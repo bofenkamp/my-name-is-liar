@@ -586,7 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21a88a7ec1e2f964ab969428d8f9fc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _PushupsRequired: 5
+  _PushupsRequired: 14
   _PushupVariance: 6
   _Man: {fileID: 657874151}
   _Meter: {fileID: 618667193}
