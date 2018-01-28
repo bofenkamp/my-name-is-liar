@@ -8,12 +8,13 @@ public class DanceOffManager : MonoBehaviour {
 
 	[SerializeField]
 	private SpriteRenderer _YellowDancingImage, _BlueDancingImage;
+	[SerializeField]
+	private Sprite yellowSprite1, yellowSprite2, blueSprite1, blueSprite2;
     [SerializeField]
     private int _HitsRequired = 30;
     [SerializeField]
     private int _HitsVariance = 10;
 
-	private SpriteRenderer _currentImage;
 	private SpriteDirection _currentDirection;
 
 	private Microgame _microgame;
@@ -29,12 +30,13 @@ public class DanceOffManager : MonoBehaviour {
 		_microgame = GetComponent<Microgame>();
 		_currentDirection = SpriteDirection.right;
 
+		print (_microgame == null);
+		print (_microgame.Owner == null);
 		if (_microgame.Owner.PlayerNumber == PlayerID.One) {
-			_currentImage = _YellowDancingImage;
+			_YellowDancingImage.gameObject.SetActive (true);
 		} else {
-			_currentImage = _BlueDancingImage;
+			_BlueDancingImage.gameObject.SetActive (true);
 		}
-		_currentImage.gameObject.SetActive (true);
 
         _HitsRemaining = _HitsRequired + Random.Range(0, _HitsVariance);
 
@@ -55,11 +57,9 @@ public class DanceOffManager : MonoBehaviour {
 
 		float getAxis = _microgame.Owner.GetAxis (PlayerAxis.Horizontal);
 		if (getAxis < 0 && _currentDirection == SpriteDirection.right) {
-			_currentImage.flipX = !_currentImage.flipX;
 			_currentDirection = SpriteDirection.left;
             _HitsRemaining--;
 		} else if (getAxis > 0 && _currentDirection == SpriteDirection.left) {
-			_currentImage.flipX = !_currentImage.flipX;
 			_currentDirection = SpriteDirection.right;
             _HitsRemaining--;
 		}
@@ -67,5 +67,21 @@ public class DanceOffManager : MonoBehaviour {
         if(_HitsRemaining <= 0) {
             _microgame.EndMicrogame(true);
         }
+	}
+
+	void flipImage() {
+		if (_microgame.Owner.PlayerNumber == PlayerID.One) {
+			if (_YellowDancingImage.sprite == yellowSprite1) {
+				_YellowDancingImage.sprite = yellowSprite2;
+			} else {
+				_YellowDancingImage.sprite = yellowSprite1;
+			}
+		} else {
+			if (_BlueDancingImage.sprite == blueSprite1) {
+				_BlueDancingImage.sprite = blueSprite2;
+			} else {
+				_BlueDancingImage.sprite = blueSprite1;
+			}
+		}
 	}
 }

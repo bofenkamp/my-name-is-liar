@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     public static readonly string[] MicrogameNames = {
         //"Beer Pong", "Dance Off", "Lizard", "Dance", "Pushups"
-		"Pushups"
+		"Dance off"
     };
 
 	public void RegisterPlayer(Player plr) {
