@@ -27,8 +27,7 @@ public class GameManager : MonoBehaviour
     private GameObject[] npcs;
 
     public static readonly string[] MicrogameNames = {
-        //"Beer Pong", "Dance Off", "Lizard", "Dance", "Pushups"
-		"Pushups"
+        "Beer Pong", "Dance Off", "Lizard", "Dance", "Pushups"
     };
 
 	public void RegisterPlayer(Player plr) {
@@ -56,7 +55,8 @@ public class GameManager : MonoBehaviour
         int r = Random.Range(0, MicrogameNames.Length);
         string scene_name = MicrogameNames[r];
 
-        SceneManager.LoadSceneAsync(scene_name, LoadSceneMode.Additive);
+        var aso = SceneManager.LoadSceneAsync(scene_name, LoadSceneMode.Additive);
+        aso.completed += (obj) => _Players[(int)id].UIAnimator.SetBool("loaded", true);
         _Players[(int)id].UIAnimator.SetTrigger("start");
         _LoadingMicrogames[(int)id] = scene_name;
 			

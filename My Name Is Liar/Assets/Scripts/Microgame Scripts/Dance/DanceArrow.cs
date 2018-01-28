@@ -6,6 +6,7 @@ public class DanceArrow : MonoBehaviour {
 
     public float Speed { get; set; }
     public float DistanceToTravel { get; set; }
+    public float SweetspotInterval { get; set; }
 
     public Direction Cardinality {
         set {
@@ -23,9 +24,6 @@ public class DanceArrow : MonoBehaviour {
     [HideInInspector]
     public DanceManager Manager;
 
-    [SerializeField]
-    private float _SweetSpotInterval = 0.05f; // in s
-
     private float _StartTime;
     private Vector3 _StartPos;
 
@@ -41,7 +39,7 @@ public class DanceArrow : MonoBehaviour {
         transform.position = _StartPos + Vector3.down * Speed * elapsed;
 
         float perfect_time = DistanceToTravel / Speed;
-        if (Mathf.Abs(perfect_time - elapsed) <= _SweetSpotInterval)
+        if (Mathf.Abs(perfect_time - elapsed) <= SweetspotInterval)
         {
             float hoz = Game.Owner.GetAxis(PlayerAxis.Horizontal);
             float vrt = Game.Owner.GetAxis(PlayerAxis.Vertical);
@@ -55,7 +53,7 @@ public class DanceArrow : MonoBehaviour {
             }
         }
 
-        if (elapsed > perfect_time + _SweetSpotInterval)
+        if (elapsed > perfect_time + SweetspotInterval + 1)
             Manager.OnMiss(this);
 	}
 }
