@@ -117,19 +117,21 @@ public class Microgame : MonoBehaviour {
     } 
 
 	public void EndMicrogame(bool won) {
-		
-		Owner.GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Dynamic;
-		//		GameManager.Instance.npcs [(int)Owner.PlayerNumber].GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Dynamic;
+		Owner.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 
-		//change the npc's opinion based on results
-		if (won)
-			GameManager.Instance.npcs[(int)Owner.PlayerNumber].GetComponent<NPC>().ChangeOpinion((int)Owner.PlayerNumber + 1, 1);
-		else
-			GameManager.Instance.npcs[(int)Owner.PlayerNumber].GetComponent<NPC>().ChangeOpinion((int)Owner.PlayerNumber + 1, -1);
+        //change the npc's opinion based on results
+        var npcobj = GameManager.Instance.GetNPCForPlayer(Owner.PlayerNumber);
+        var npc = npcobj == null ? null : npcobj.GetComponent<NPC>();
+        if (npc != null) {
+            if (won)
+                npc.ChangeOpinion((int)Owner.PlayerNumber + 1, 1);
+            else
+                npc.ChangeOpinion((int)Owner.PlayerNumber + 1, -1);
 
-		//let the NPC and player move again
-		GameManager.Instance.npcs [(int)Owner.PlayerNumber].GetComponent<NPC> ().inMinigame = false;
-		GameManager.Instance.npcs [(int)Owner.PlayerNumber].GetComponent<NPC> ().AllowMovement ();
+            //let the NPC and player move again
+            npc.inMinigame = false;
+            npc.AllowMovement();
+        }
 		
         // TODO
         GameManager.Instance.DeregisterMicrogame(this);

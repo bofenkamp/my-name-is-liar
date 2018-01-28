@@ -56,7 +56,9 @@ public class Player : MonoBehaviour {
             _MicrogameTexture = value;
             _MicrogameImage.texture = value;
 
-            GameManager.Instance.GetMicrogameForPlayer(PlayerNumber).RefetchMicrogameTexture();
+            var mg = GameManager.Instance.GetMicrogameForPlayer(PlayerNumber);
+            if(mg != null)
+                mg.RefetchMicrogameTexture();
         }
     }
     private RenderTexture _MicrogameTexture;
